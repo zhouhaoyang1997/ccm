@@ -14,10 +14,10 @@ import java.util.List;
  * @create 2017-08-15 18:38
  **/
 @Service
-public class MemoryServiceImpl implements MemoryService
-{
+public class MemoryServiceImpl implements MemoryService {
     @Autowired
     MemoryInfoMapper memoryInfoMapper;
+
     @Override
     public List<MemoryInfo> getMemoryTotal(String ip) {
         MemoryInfoExample memoryInfoExample = new MemoryInfoExample();

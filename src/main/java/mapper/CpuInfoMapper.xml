@@ -1,199 +1,201 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mapper.CpuInfoMapper" >
-  <resultMap id="BaseResultMap" type="pojo.CpuInfo" >
-    <result column="Ip_id" property="ipId" jdbcType="CHAR" />
-    <result column="time" property="time" jdbcType="DOUBLE" />
-    <result column="Cpu_User" property="cpuUser" jdbcType="DOUBLE" />
-    <result column="Cpu_System" property="cpuSystem" jdbcType="DOUBLE" />
-    <result column="Cpu_Idle" property="cpuIdle" jdbcType="DOUBLE" />
-    <result column="Cpu_interrupt" property="cpuInterrupt" jdbcType="DOUBLE" />
-    <result column="Cpu_Dpc" property="cpuDpc" jdbcType="DOUBLE" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="mapper.CpuInfoMapper">
+    <resultMap id="BaseResultMap" type="pojo.CpuInfo">
+        <result column="Ip_id" property="ipId" jdbcType="CHAR"/>
+        <result column="time" property="time" jdbcType="DOUBLE"/>
+        <result column="Cpu_User" property="cpuUser" jdbcType="DOUBLE"/>
+        <result column="Cpu_System" property="cpuSystem" jdbcType="DOUBLE"/>
+        <result column="Cpu_Idle" property="cpuIdle" jdbcType="DOUBLE"/>
+        <result column="Cpu_interrupt" property="cpuInterrupt" jdbcType="DOUBLE"/>
+        <result column="Cpu_Dpc" property="cpuDpc" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        Ip_id, time, Cpu_User, Cpu_System, Cpu_Idle, Cpu_interrupt, Cpu_Dpc
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.CpuInfoExample">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    Ip_id, time, Cpu_User, Cpu_System, Cpu_Idle, Cpu_interrupt, Cpu_Dpc
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.CpuInfoExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from cpu_info
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="pojo.CpuInfoExample" >
-    delete from cpu_info
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="pojo.CpuInfo" >
-    insert into cpu_info (Ip_id, time, Cpu_User, 
-      Cpu_System, Cpu_Idle, Cpu_interrupt, 
-      Cpu_Dpc)
-    values (#{ipId,jdbcType=CHAR}, #{time,jdbcType=DOUBLE}, #{cpuUser,jdbcType=DOUBLE}, 
-      #{cpuSystem,jdbcType=DOUBLE}, #{cpuIdle,jdbcType=DOUBLE}, #{cpuInterrupt,jdbcType=DOUBLE}, 
-      #{cpuDpc,jdbcType=DOUBLE})
-  </insert>
-  <insert id="insertSelective" parameterType="pojo.CpuInfo" >
-    insert into cpu_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="ipId != null" >
-        Ip_id,
-      </if>
-      <if test="time != null" >
-        time,
-      </if>
-      <if test="cpuUser != null" >
-        Cpu_User,
-      </if>
-      <if test="cpuSystem != null" >
-        Cpu_System,
-      </if>
-      <if test="cpuIdle != null" >
-        Cpu_Idle,
-      </if>
-      <if test="cpuInterrupt != null" >
-        Cpu_interrupt,
-      </if>
-      <if test="cpuDpc != null" >
-        Cpu_Dpc,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="ipId != null" >
-        #{ipId,jdbcType=CHAR},
-      </if>
-      <if test="time != null" >
-        #{time,jdbcType=DOUBLE},
-      </if>
-      <if test="cpuUser != null" >
-        #{cpuUser,jdbcType=DOUBLE},
-      </if>
-      <if test="cpuSystem != null" >
-        #{cpuSystem,jdbcType=DOUBLE},
-      </if>
-      <if test="cpuIdle != null" >
-        #{cpuIdle,jdbcType=DOUBLE},
-      </if>
-      <if test="cpuInterrupt != null" >
-        #{cpuInterrupt,jdbcType=DOUBLE},
-      </if>
-      <if test="cpuDpc != null" >
-        #{cpuDpc,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="pojo.CpuInfoExample" resultType="java.lang.Integer" >
-    select count(*) from cpu_info
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update cpu_info
-    <set >
-      <if test="record.ipId != null" >
-        Ip_id = #{record.ipId,jdbcType=CHAR},
-      </if>
-      <if test="record.time != null" >
+        <include refid="Base_Column_List"/>
+        from cpu_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="pojo.CpuInfoExample">
+        delete from cpu_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="pojo.CpuInfo">
+        insert into cpu_info (Ip_id, time, Cpu_User,
+        Cpu_System, Cpu_Idle, Cpu_interrupt,
+        Cpu_Dpc)
+        values (#{ipId,jdbcType=CHAR}, #{time,jdbcType=DOUBLE}, #{cpuUser,jdbcType=DOUBLE},
+        #{cpuSystem,jdbcType=DOUBLE}, #{cpuIdle,jdbcType=DOUBLE}, #{cpuInterrupt,jdbcType=DOUBLE},
+        #{cpuDpc,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="pojo.CpuInfo">
+        insert into cpu_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ipId != null">
+                Ip_id,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="cpuUser != null">
+                Cpu_User,
+            </if>
+            <if test="cpuSystem != null">
+                Cpu_System,
+            </if>
+            <if test="cpuIdle != null">
+                Cpu_Idle,
+            </if>
+            <if test="cpuInterrupt != null">
+                Cpu_interrupt,
+            </if>
+            <if test="cpuDpc != null">
+                Cpu_Dpc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ipId != null">
+                #{ipId,jdbcType=CHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=DOUBLE},
+            </if>
+            <if test="cpuUser != null">
+                #{cpuUser,jdbcType=DOUBLE},
+            </if>
+            <if test="cpuSystem != null">
+                #{cpuSystem,jdbcType=DOUBLE},
+            </if>
+            <if test="cpuIdle != null">
+                #{cpuIdle,jdbcType=DOUBLE},
+            </if>
+            <if test="cpuInterrupt != null">
+                #{cpuInterrupt,jdbcType=DOUBLE},
+            </if>
+            <if test="cpuDpc != null">
+                #{cpuDpc,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="pojo.CpuInfoExample" resultType="java.lang.Integer">
+        select count(*) from cpu_info
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update cpu_info
+        <set>
+            <if test="record.ipId != null">
+                Ip_id = #{record.ipId,jdbcType=CHAR},
+            </if>
+            <if test="record.time != null">
+                time = #{record.time,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cpuUser != null">
+                Cpu_User = #{record.cpuUser,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cpuSystem != null">
+                Cpu_System = #{record.cpuSystem,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cpuIdle != null">
+                Cpu_Idle = #{record.cpuIdle,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cpuInterrupt != null">
+                Cpu_interrupt = #{record.cpuInterrupt,jdbcType=DOUBLE},
+            </if>
+            <if test="record.cpuDpc != null">
+                Cpu_Dpc = #{record.cpuDpc,jdbcType=DOUBLE},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update cpu_info
+        set Ip_id = #{record.ipId,jdbcType=CHAR},
         time = #{record.time,jdbcType=DOUBLE},
-      </if>
-      <if test="record.cpuUser != null" >
         Cpu_User = #{record.cpuUser,jdbcType=DOUBLE},
-      </if>
-      <if test="record.cpuSystem != null" >
         Cpu_System = #{record.cpuSystem,jdbcType=DOUBLE},
-      </if>
-      <if test="record.cpuIdle != null" >
         Cpu_Idle = #{record.cpuIdle,jdbcType=DOUBLE},
-      </if>
-      <if test="record.cpuInterrupt != null" >
         Cpu_interrupt = #{record.cpuInterrupt,jdbcType=DOUBLE},
-      </if>
-      <if test="record.cpuDpc != null" >
-        Cpu_Dpc = #{record.cpuDpc,jdbcType=DOUBLE},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update cpu_info
-    set Ip_id = #{record.ipId,jdbcType=CHAR},
-      time = #{record.time,jdbcType=DOUBLE},
-      Cpu_User = #{record.cpuUser,jdbcType=DOUBLE},
-      Cpu_System = #{record.cpuSystem,jdbcType=DOUBLE},
-      Cpu_Idle = #{record.cpuIdle,jdbcType=DOUBLE},
-      Cpu_interrupt = #{record.cpuInterrupt,jdbcType=DOUBLE},
-      Cpu_Dpc = #{record.cpuDpc,jdbcType=DOUBLE}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
+        Cpu_Dpc = #{record.cpuDpc,jdbcType=DOUBLE}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
 </mapper>

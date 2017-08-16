@@ -207,80 +207,80 @@
                             <div class="tpl-echarts" id="cpu">
                             </div>
                             <script type="text/javascript">
-                                    var trends = echarts.init(document.getElementById("cpu"));
+                                var trends = echarts.init(document.getElementById("cpu"));
 
-                                    function randomData() {
-                                        now = new Date(+now + oneDay);
-                                        value = value + Math.random() * 21 - 10;
-                                        return {
-                                            name: now.toString(),
-                                            value: [
-                                                [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-                                                Math.round(value)
-                                            ]
-                                        }
+                                function randomData() {
+                                    now = new Date(+now + oneDay);
+                                    value = value + Math.random() * 21 - 10;
+                                    return {
+                                        name: now.toString(),
+                                        value: [
+                                            [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+                                            Math.round(value)
+                                        ]
                                     }
+                                }
 
-                                    var data = [];
-                                    var now = +new Date(1997, 9, 3);
-                                    var oneDay = 24 * 3600 * 1000;
-                                    var value = Math.random() * 1000;
-                                    for (var i = 0; i < 1000; i++) {
+                                var data = [];
+                                var now = +new Date(1997, 9, 3);
+                                var oneDay = 24 * 3600 * 1000;
+                                var value = Math.random() * 1000;
+                                for (var i = 0; i < 1000; i++) {
+                                    data.push(randomData());
+                                }
+
+                                option = {
+                                    title: {
+                                        text: 'CPU + 时间坐标轴'
+                                    },
+                                    tooltip: {
+                                        trigger: 'axis',
+                                        formatter: function (params) {
+                                            params = params[0];
+                                            var date = new Date(params.name);
+                                            return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+                                        },
+                                        axisPointer: {
+                                            animation: false
+                                        }
+                                    },
+                                    xAxis: {
+                                        type: 'time',
+                                        splitLine: {
+                                            show: false
+                                        }
+                                    },
+                                    yAxis: {
+                                        type: 'value',
+                                        boundaryGap: [0, '100%'],
+                                        splitLine: {
+                                            show: false
+                                        }
+                                    },
+                                    series: [{
+                                        name: '模拟数据',
+                                        type: 'line',
+                                        showSymbol: false,
+                                        hoverAnimation: false,
+                                        data: data
+                                    }]
+                                };
+
+                                timeTicket = setInterval(function () {
+
+                                    for (var i = 0; i < 5; i++) {
+                                        data.shift();
                                         data.push(randomData());
                                     }
 
-                                    option = {
-                                        title: {
-                                            text: 'CPU + 时间坐标轴'
-                                        },
-                                        tooltip: {
-                                            trigger: 'axis',
-                                            formatter: function (params) {
-                                                params = params[0];
-                                                var date = new Date(params.name);
-                                                return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
-                                            },
-                                            axisPointer: {
-                                                animation: false
-                                            }
-                                        },
-                                        xAxis: {
-                                            type: 'time',
-                                            splitLine: {
-                                                show: false
-                                            }
-                                        },
-                                        yAxis: {
-                                            type: 'value',
-                                            boundaryGap: [0, '100%'],
-                                            splitLine: {
-                                                show: false
-                                            }
-                                        },
+                                    trends.setOption({
                                         series: [{
-                                            name: '模拟数据',
-                                            type: 'line',
-                                            showSymbol: false,
-                                            hoverAnimation: false,
                                             data: data
                                         }]
-                                    };
+                                    });
+                                }, 1000);
 
-                                    timeTicket = setInterval(function () {
-
-                                        for (var i = 0; i < 5; i++) {
-                                            data.shift();
-                                            data.push(randomData());
-                                        }
-
-                                        trends.setOption({
-                                            series: [{
-                                                data: data
-                                            }]
-                                        });
-                                    }, 1000);
-
-                                    trends.setOption(option);
+                                trends.setOption(option);
                             </script>
                         </div>
                         <div class="am-tab-panel am-fade" id="tab2">

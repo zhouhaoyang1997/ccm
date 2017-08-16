@@ -37,10 +37,10 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 
-        <table schema="" tableName="cpu_info" />
-        <table schema="" tableName="disk_info" />
-        <table schema="" tableName="memory_info" />
-        <table schema="" tableName="net_info" />
+        <table schema="" tableName="cpu_info"/>
+        <table schema="" tableName="disk_info"/>
+        <table schema="" tableName="memory_info"/>
+        <table schema="" tableName="net_info"/>
     </context>
 </generatorConfiguration>
 

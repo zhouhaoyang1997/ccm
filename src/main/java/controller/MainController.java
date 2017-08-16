@@ -1,5 +1,4 @@
 package controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +12,9 @@ import service.MemoryService;
 public class MainController {
     @Autowired
     MemoryService memoryService;
+
     @RequestMapping("/index")
-    public String test(){
-       // List<MemoryInfo> list = memoryService.getMemoryTotal("192.168.231.1");
+    public String test() {
         return "index";
     }
 }
