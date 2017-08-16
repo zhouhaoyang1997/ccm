@@ -15,6 +15,6 @@ public class MainController {
 
     @RequestMapping("/index")
     public String test() {
-        return "fuck";
+        return "index";
     }
 }
