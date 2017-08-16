@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/amazeui.min.css"/>
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/app.css">
+    <script src="../js/jquery.min.js"></script>
     <script src="../js/echarts.min.js"></script>
 
     <title>CCM</title>
@@ -206,85 +207,76 @@
                         <div class="am-tab-panel am-fade am-in am-active" id="tab1">
                             <div class="tpl-echarts" id="cpu">
                             </div>
-                            <script type="text/javascript">
-                                var trends = echarts.init(document.getElementById("cpu"));
 
-                                function randomData() {
-                                    now = new Date(+now + oneDay);
-                                    value = value + Math.random() * 21 - 10;
-                                    return {
-                                        name: now.toString(),
-                                        value: [
-                                            [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-                                            Math.round(value)
-                                        ]
-                                    }
-                                }
-
-                                var data = [];
-                                var now = +new Date(1997, 9, 3);
-                                var oneDay = 24 * 3600 * 1000;
-                                var value = Math.random() * 1000;
-                                for (var i = 0; i < 1000; i++) {
-                                    data.push(randomData());
-                                }
-
-                                option = {
-                                    title: {
-                                        text: 'CPU + 时间坐标轴'
-                                    },
-                                    tooltip: {
-                                        trigger: 'axis',
-                                        formatter: function (params) {
-                                            params = params[0];
-                                            var date = new Date(params.name);
-                                            return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
-                                        },
-                                        axisPointer: {
-                                            animation: false
-                                        }
-                                    },
-                                    xAxis: {
-                                        type: 'time',
-                                        splitLine: {
-                                            show: false
-                                        }
-                                    },
-                                    yAxis: {
-                                        type: 'value',
-                                        boundaryGap: [0, '100%'],
-                                        splitLine: {
-                                            show: false
-                                        }
-                                    },
-                                    series: [{
-                                        name: '模拟数据',
-                                        type: 'line',
-                                        showSymbol: false,
-                                        hoverAnimation: false,
-                                        data: data
-                                    }]
-                                };
-
-                                timeTicket = setInterval(function () {
-
-                                    for (var i = 0; i < 5; i++) {
-                                        data.shift();
-                                        data.push(randomData());
-                                    }
-
-                                    trends.setOption({
-                                        series: [{
-                                            data: data
-                                        }]
-                                    });
-                                }, 1000);
-
-                                trends.setOption(option);
-                            </script>
                         </div>
                         <div class="am-tab-panel am-fade" id="tab2">
+                            <div class="tpl-echarts" id="memory">
+                            </div>
+                            <script type="text/javascript">
+                                function getLocalTime(ns){
+                                    return new Date(parseInt(ns) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+                                }
+                                var memory = echarts.init(document.getElementById("memory"));
+                                memory.setOption(
+                                    {
+                                        title:{
+                                            text:'Memory'
+                                        },tooltip:{},
+                                        legend:{
+                                            data:['Total','Used','Free']
+                                        },
+                                        xAxis: {
+                                            type: 'category',
 
+                                            data: []
+                                        },
+                                        yAxis: {
+                                            type: 'value'
+                                        },series: [{
+                                            name:'Total',
+                                            type:'line',
+                                            data: []
+                                        },{
+                                            name:'Used',
+                                            type:'line',
+                                            data: []
+                                        },{
+                                            name:'Free',
+                                            type:'line',
+                                            data: []
+                                        }
+                                    ]}
+                                );
+                                var cate=[];
+                                var total=[];
+                                var used=[];
+                                var free=[];
+                                $.get('../memory/hour').done(function (data) {
+                                    //填入数据
+                                    for(var i=0;i<data.length;i++){
+                                        cate.push(getLocalTime(data[i].time));
+                                        total.push(data[i].memoryTotal);
+                                        used.push(data[i].memoryUsed);
+                                        free.push(data[i].memoryFree);
+                                    }
+                                    memory.setOption({
+                                        xAxis: {
+                                            data: cate
+                                        },
+                                        series: [{
+                                            // 根据名字对应到相应的系列
+                                            name: 'total',
+                                            data: total
+                                        },{
+                                            name: 'Used',
+                                            data: used
+                                        },{
+                                            name: 'Free',
+                                            data: free
+                                        }]
+                                    })
+                                })
+                            </script>
                         </div>
 
                         <div class="am-tab-panel am-fade" id="tab3">
@@ -297,7 +289,6 @@
         </div>
     </div>
 </div>
-<script src="../js/jquery.min.js"></script>
 <script src="../js/amazeui.min.js"></script>
 <script src="../js/iscroll.js"></script>
 <script src="../js/app.js"></script>
