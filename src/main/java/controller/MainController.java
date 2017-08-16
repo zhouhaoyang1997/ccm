@@ -10,8 +10,6 @@ import service.MemoryService;
  **/
 @Controller
 public class MainController {
-    @Autowired
-    MemoryService memoryService;
 
     @RequestMapping("/index")
     public String test() {
