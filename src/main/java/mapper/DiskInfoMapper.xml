@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.DiskInfoMapper" >
+  <resultMap id="BaseResultMap" type="pojo.DiskInfo" >
+    <result column="Ip_id" property="ipId" jdbcType="CHAR" />
+    <result column="time" property="time" jdbcType="DOUBLE" />
+    <result column="Disk_Total" property="diskTotal" jdbcType="DOUBLE" />
+    <result column="Disk_Used" property="diskUsed" jdbcType="DOUBLE" />
+    <result column="Disk_Free" property="diskFree" jdbcType="DOUBLE" />
+    <result column="Disk_Percent" property="diskPercent" jdbcType="DOUBLE" />
+    <result column="Disk_IoReadCount" property="diskIoreadcount" jdbcType="DOUBLE" />
+    <result column="Disk_IoWriteCount" property="diskIowritecount" jdbcType="DOUBLE" />
+    <result column="Disk_IoReadBytes" property="diskIoreadbytes" jdbcType="DOUBLE" />
+    <result column="Disk_IoWriteBytes" property="diskIowritebytes" jdbcType="DOUBLE" />
+    <result column="Disk_IoReadTime" property="diskIoreadtime" jdbcType="DOUBLE" />
+    <result column="Disk_IoWriteTime" property="diskIowritetime" jdbcType="DOUBLE" />
+    <result column="Disk_SIoReadCount" property="diskSioreadcount" jdbcType="DOUBLE" />
+    <result column="Disk_SIoWriteCount" property="diskSiowritecount" jdbcType="DOUBLE" />
+    <result column="Disk_SIoReadBytes" property="diskSioreadbytes" jdbcType="DOUBLE" />
+    <result column="Disk_SIoWriteBytes" property="diskSiowritebytes" jdbcType="DOUBLE" />
+    <result column="Disk_SIoReadTime" property="diskSioreadtime" jdbcType="DOUBLE" />
+    <result column="Disk_SIoWriteTime" property="diskSiowritetime" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Ip_id, time, Disk_Total, Disk_Used, Disk_Free, Disk_Percent, Disk_IoReadCount, Disk_IoWriteCount, 
+    Disk_IoReadBytes, Disk_IoWriteBytes, Disk_IoReadTime, Disk_IoWriteTime, Disk_SIoReadCount, 
+    Disk_SIoWriteCount, Disk_SIoReadBytes, Disk_SIoWriteBytes, Disk_SIoReadTime, Disk_SIoWriteTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.DiskInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from disk_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="pojo.DiskInfoExample" >
+    delete from disk_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.DiskInfo" >
+    insert into disk_info (Ip_id, time, Disk_Total, 
+      Disk_Used, Disk_Free, Disk_Percent, 
+      Disk_IoReadCount, Disk_IoWriteCount, Disk_IoReadBytes, 
+      Disk_IoWriteBytes, Disk_IoReadTime, Disk_IoWriteTime, 
+      Disk_SIoReadCount, Disk_SIoWriteCount, Disk_SIoReadBytes, 
+      Disk_SIoWriteBytes, Disk_SIoReadTime, Disk_SIoWriteTime
+      )
+    values (#{ipId,jdbcType=CHAR}, #{time,jdbcType=DOUBLE}, #{diskTotal,jdbcType=DOUBLE}, 
+      #{diskUsed,jdbcType=DOUBLE}, #{diskFree,jdbcType=DOUBLE}, #{diskPercent,jdbcType=DOUBLE}, 
+      #{diskIoreadcount,jdbcType=DOUBLE}, #{diskIowritecount,jdbcType=DOUBLE}, #{diskIoreadbytes,jdbcType=DOUBLE}, 
+      #{diskIowritebytes,jdbcType=DOUBLE}, #{diskIoreadtime,jdbcType=DOUBLE}, #{diskIowritetime,jdbcType=DOUBLE}, 
+      #{diskSioreadcount,jdbcType=DOUBLE}, #{diskSiowritecount,jdbcType=DOUBLE}, #{diskSioreadbytes,jdbcType=DOUBLE}, 
+      #{diskSiowritebytes,jdbcType=DOUBLE}, #{diskSioreadtime,jdbcType=DOUBLE}, #{diskSiowritetime,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.DiskInfo" >
+    insert into disk_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ipId != null" >
+        Ip_id,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="diskTotal != null" >
+        Disk_Total,
+      </if>
+      <if test="diskUsed != null" >
+        Disk_Used,
+      </if>
+      <if test="diskFree != null" >
+        Disk_Free,
+      </if>
+      <if test="diskPercent != null" >
+        Disk_Percent,
+      </if>
+      <if test="diskIoreadcount != null" >
+        Disk_IoReadCount,
+      </if>
+      <if test="diskIowritecount != null" >
+        Disk_IoWriteCount,
+      </if>
+      <if test="diskIoreadbytes != null" >
+        Disk_IoReadBytes,
+      </if>
+      <if test="diskIowritebytes != null" >
+        Disk_IoWriteBytes,
+      </if>
+      <if test="diskIoreadtime != null" >
+        Disk_IoReadTime,
+      </if>
+      <if test="diskIowritetime != null" >
+        Disk_IoWriteTime,
+      </if>
+      <if test="diskSioreadcount != null" >
+        Disk_SIoReadCount,
+      </if>
+      <if test="diskSiowritecount != null" >
+        Disk_SIoWriteCount,
+      </if>
+      <if test="diskSioreadbytes != null" >
+        Disk_SIoReadBytes,
+      </if>
+      <if test="diskSiowritebytes != null" >
+        Disk_SIoWriteBytes,
+      </if>
+      <if test="diskSioreadtime != null" >
+        Disk_SIoReadTime,
+      </if>
+      <if test="diskSiowritetime != null" >
+        Disk_SIoWriteTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ipId != null" >
+        #{ipId,jdbcType=CHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=DOUBLE},
+      </if>
+      <if test="diskTotal != null" >
+        #{diskTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="diskUsed != null" >
+        #{diskUsed,jdbcType=DOUBLE},
+      </if>
+      <if test="diskFree != null" >
+        #{diskFree,jdbcType=DOUBLE},
+      </if>
+      <if test="diskPercent != null" >
+        #{diskPercent,jdbcType=DOUBLE},
+      </if>
+      <if test="diskIoreadcount != null" >
+        #{diskIoreadcount,jdbcType=DOUBLE},
+      </if>
+      <if test="diskIowritecount != null" >
+        #{diskIowritecount,jdbcType=DOUBLE},
+      </if>
+      <if test="diskIoreadbytes != null" >
+        #{diskIoreadbytes,jdbcType=DOUBLE},
+      </if>
+      <if test="diskIowritebytes != null" >
+        #{diskIowritebytes,jdbcType=DOUBLE},
+      </if>
+      <if test="diskIoreadtime != null" >
+        #{diskIoreadtime,jdbcType=DOUBLE},
+      </if>
+      <if test="diskIowritetime != null" >
+        #{diskIowritetime,jdbcType=DOUBLE},
+      </if>
+      <if test="diskSioreadcount != null" >
+        #{diskSioreadcount,jdbcType=DOUBLE},
+      </if>
+      <if test="diskSiowritecount != null" >
+        #{diskSiowritecount,jdbcType=DOUBLE},
+      </if>
+      <if test="diskSioreadbytes != null" >
+        #{diskSioreadbytes,jdbcType=DOUBLE},
+      </if>
+      <if test="diskSiowritebytes != null" >
+        #{diskSiowritebytes,jdbcType=DOUBLE},
+      </if>
+      <if test="diskSioreadtime != null" >
+        #{diskSioreadtime,jdbcType=DOUBLE},
+      </if>
+      <if test="diskSiowritetime != null" >
+        #{diskSiowritetime,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.DiskInfoExample" resultType="java.lang.Integer" >
+    select count(*) from disk_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update disk_info
+    <set >
+      <if test="record.ipId != null" >
+        Ip_id = #{record.ipId,jdbcType=CHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskTotal != null" >
+        Disk_Total = #{record.diskTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskUsed != null" >
+        Disk_Used = #{record.diskUsed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskFree != null" >
+        Disk_Free = #{record.diskFree,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskPercent != null" >
+        Disk_Percent = #{record.diskPercent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskIoreadcount != null" >
+        Disk_IoReadCount = #{record.diskIoreadcount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskIowritecount != null" >
+        Disk_IoWriteCount = #{record.diskIowritecount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskIoreadbytes != null" >
+        Disk_IoReadBytes = #{record.diskIoreadbytes,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskIowritebytes != null" >
+        Disk_IoWriteBytes = #{record.diskIowritebytes,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskIoreadtime != null" >
+        Disk_IoReadTime = #{record.diskIoreadtime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskIowritetime != null" >
+        Disk_IoWriteTime = #{record.diskIowritetime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskSioreadcount != null" >
+        Disk_SIoReadCount = #{record.diskSioreadcount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskSiowritecount != null" >
+        Disk_SIoWriteCount = #{record.diskSiowritecount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskSioreadbytes != null" >
+        Disk_SIoReadBytes = #{record.diskSioreadbytes,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskSiowritebytes != null" >
+        Disk_SIoWriteBytes = #{record.diskSiowritebytes,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskSioreadtime != null" >
+        Disk_SIoReadTime = #{record.diskSioreadtime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diskSiowritetime != null" >
+        Disk_SIoWriteTime = #{record.diskSiowritetime,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update disk_info
+    set Ip_id = #{record.ipId,jdbcType=CHAR},
+      time = #{record.time,jdbcType=DOUBLE},
+      Disk_Total = #{record.diskTotal,jdbcType=DOUBLE},
+      Disk_Used = #{record.diskUsed,jdbcType=DOUBLE},
+      Disk_Free = #{record.diskFree,jdbcType=DOUBLE},
+      Disk_Percent = #{record.diskPercent,jdbcType=DOUBLE},
+      Disk_IoReadCount = #{record.diskIoreadcount,jdbcType=DOUBLE},
+      Disk_IoWriteCount = #{record.diskIowritecount,jdbcType=DOUBLE},
+      Disk_IoReadBytes = #{record.diskIoreadbytes,jdbcType=DOUBLE},
+      Disk_IoWriteBytes = #{record.diskIowritebytes,jdbcType=DOUBLE},
+      Disk_IoReadTime = #{record.diskIoreadtime,jdbcType=DOUBLE},
+      Disk_IoWriteTime = #{record.diskIowritetime,jdbcType=DOUBLE},
+      Disk_SIoReadCount = #{record.diskSioreadcount,jdbcType=DOUBLE},
+      Disk_SIoWriteCount = #{record.diskSiowritecount,jdbcType=DOUBLE},
+      Disk_SIoReadBytes = #{record.diskSioreadbytes,jdbcType=DOUBLE},
+      Disk_SIoWriteBytes = #{record.diskSiowritebytes,jdbcType=DOUBLE},
+      Disk_SIoReadTime = #{record.diskSioreadtime,jdbcType=DOUBLE},
+      Disk_SIoWriteTime = #{record.diskSiowritetime,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
