@@ -1,5 +1,6 @@
 package controller;
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,13 @@ public class MemoryController {
     @RequestMapping("/hour")
     @ResponseBody
     public List<MemoryInfo> getMemory(){
-        return memoryService.getMemory("169.254.226.220");
+        //return memoryService.getMemory("169.254.226.220");
+        return memoryService.getMemoryByHour("10.12.51.105");
+    }
+
+    @RequestMapping("/update")
+    @ResponseBody
+    public MemoryInfo getUpdateMemory(){
+        return memoryService.getUpdateMemory("10.12.51.105").get(0);
     }
 }

@@ -283,10 +283,14 @@
                                     })
                                 });
                                 setInterval(function () {
-                                    $.get('/memory/update').done(function () {
-                                        total.push(returnData(data[0].time,data[i].memoryTotal));
-                                        used.push(returnData(data[0].time,data[i].memoryUsed));
-                                        free.push(returnData(data[0].time,data[i].memoryFree));
+                                    $.get('../memory/update').done(function (data) {
+
+                                        total.push(returnData(data.time,data.memoryTotal));
+                                        used.push(returnData(data.time,data.memoryUsed));
+                                        free.push(returnData(data.time,data.memoryFree));
+                                        total.shift();
+                                        used.shift();
+                                        free.shift();
                                         memory.setOption({
                                             series: [{
                                                 // 根据名字对应到相应的系列
@@ -301,13 +305,7 @@
                                             }]
                                         })
                                     });
-
-                                    memory.setOption({
-                                        series: [{
-                                            data: data
-                                        }]
-                                    });
-                                }, 1000);
+                                }, 40*1000);
                             </script>
                         </div>
 

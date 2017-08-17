@@ -7,6 +7,11 @@ import pojo.MemoryInfo;
 import pojo.MemoryInfoExample;
 
 public interface MemoryInfoMapper {
+
+    List<MemoryInfo> selectNewInfoByHour(String ip);
+
+    List<MemoryInfo> selectUpdateMemory(String ip);
+
     int countByExample(MemoryInfoExample example);
 
     int deleteByExample(MemoryInfoExample example);

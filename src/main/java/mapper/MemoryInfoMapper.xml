@@ -10,6 +10,13 @@
         <result column="Memory_Used" property="memoryUsed" jdbcType="DOUBLE"/>
         <result column="Memory_Free" property="memoryFree" jdbcType="DOUBLE"/>
     </resultMap>
+
+    <select id="selectNewInfoByHour" resultMap="BaseResultMap" parameterType="String">
+        SELECT * FROM memory_info WHERE Ip_id=#{ip} ORDER BY time DESC limit 0,20
+    </select>
+    <select id="selectUpdateMemory" resultMap="BaseResultMap" parameterType="String">
+        SELECT *,MAX(time) FROM memory_info WHERE Ip_id=#{ip}
+    </select>
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">

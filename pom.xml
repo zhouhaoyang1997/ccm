@@ -46,6 +46,9 @@
                 <configuration>
                     <port>8080</port>
                     <path>/</path>
+                    <systemProperties>
+                        <log4j.configuration>file:src/main/resources/properties/log4j.properties</log4j.configuration>
+                    </systemProperties>
                 </configuration>
             </plugin>
         </plugins>
@@ -72,7 +75,11 @@
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>3.4.2-fix</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>

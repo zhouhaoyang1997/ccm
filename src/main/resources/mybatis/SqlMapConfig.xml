@@ -14,10 +14,10 @@
     <!--&lt;!&ndash; 开启驼峰命名转换:Table{create_time} -> Entity{createTime} &ndash;&gt;-->
     <!--<setting name="mapUnderscoreToCamelCase" value="true" />-->
     <!--</settings>-->
-    <!--&lt;!&ndash;分页插件&ndash;&gt;-->
-    <!--<plugins>-->
-    <!--<plugin interceptor="com.github.pagehelper.PageHelper">-->
-    <!--<property name="dialect" value="mysql"/>-->
-    <!--</plugin>-->
-    <!--</plugins>-->
+    <!--分页插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/>
+        </plugin>
+    </plugins>
 </configuration>

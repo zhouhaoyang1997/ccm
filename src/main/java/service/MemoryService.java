@@ -23,4 +23,11 @@ public class MemoryService {
         mie.createCriteria().andIpIdEqualTo(ip);
         return memoryInfoMapper.selectByExample(mie);
     }
+    public List<MemoryInfo> getMemoryByHour(String ip){
+        return memoryInfoMapper.selectNewInfoByHour(ip);
+    }
+
+    public List<MemoryInfo> getUpdateMemory(String ip){
+        return memoryInfoMapper.selectUpdateMemory(ip);
+    }
 }
