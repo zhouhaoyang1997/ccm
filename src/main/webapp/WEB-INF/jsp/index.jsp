@@ -214,11 +214,50 @@
                             </div>
                             <script type="text/javascript">
                                 var memory = echarts.init(document.getElementById("memory"));
+                                function getData(){
+                                    $.get('../memory/hour').done(function (data) {
+                                        total=[];
+                                        used=[];
+                                        free=[];
+                                        //填入数据
+                                        for(var i=0;i<data.length;i++){
+                                            total.push(returnData(data[i].time,data[i].memoryTotal));
+                                            used.push(returnData(data[i].time,data[i].memoryUsed));
+                                            free.push(returnData(data[i].time,data[i].memoryFree));
+                                        }
+                                        memory.setOption({
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: 'total',
+                                                data: total
+                                            },{
+                                                name: 'Used',
+                                                data: used
+                                            },{
+                                                name: 'Free',
+                                                data: free
+                                            }]
+                                        })
+                                    });
+                                }
                                 memory.setOption(
                                     {
                                         title:{
                                             text:'Memory'
                                         },tooltip:{},
+                                        toolbox:{
+                                            show:true,
+                                            feature:{
+                                                myTool1: {
+                                                    show: true,
+                                                    title: '点击刷新',
+                                                    icon: 'image://http://echarts.baidu.com/images/favicon.png',
+                                                    onclick: function (){
+                                                        getData();
+                                                    }
+                                                }
+                                            }
+                                        },
                                         legend:{
                                             data:['Total','Used','Free']
                                         },
@@ -261,51 +300,9 @@
                                         value:[[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/')+' '+[now.getHours(),now.getMinutes(),now.getSeconds()].join(':'),value/1024]
                                     }
                                 }
-                                $.get('../memory/hour').done(function (data) {
-                                    //填入数据
-                                    for(var i=0;i<data.length;i++){
-                                        total.push(returnData(data[i].time,data[i].memoryTotal));
-                                        used.push(returnData(data[i].time,data[i].memoryUsed));
-                                        free.push(returnData(data[i].time,data[i].memoryFree));
-                                    }
-                                    memory.setOption({
-                                        series: [{
-                                            // 根据名字对应到相应的系列
-                                            name: 'total',
-                                            data: total
-                                        },{
-                                            name: 'Used',
-                                            data: used
-                                        },{
-                                            name: 'Free',
-                                            data: free
-                                        }]
-                                    })
-                                });
-                                setInterval(function () {
-                                    $.get('../memory/update').done(function (data) {
 
-                                        total.push(returnData(data.time,data.memoryTotal));
-                                        used.push(returnData(data.time,data.memoryUsed));
-                                        free.push(returnData(data.time,data.memoryFree));
-                                        total.shift();
-                                        used.shift();
-                                        free.shift();
-                                        memory.setOption({
-                                            series: [{
-                                                // 根据名字对应到相应的系列
-                                                name: 'total',
-                                                data: total
-                                            },{
-                                                name: 'Used',
-                                                data: used
-                                            },{
-                                                name: 'Free',
-                                                data: free
-                                            }]
-                                        })
-                                    });
-                                }, 40*1000);
+                                //getData();
+                                setInterval(getData(), 300*1000);
                             </script>
                         </div>
 
