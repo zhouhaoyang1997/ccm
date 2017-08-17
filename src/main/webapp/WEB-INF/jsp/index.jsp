@@ -213,9 +213,6 @@
                             <div class="tpl-echarts" id="memory">
                             </div>
                             <script type="text/javascript">
-                                function getLocalTime(ns){
-                                    return new Date(parseInt(ns) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
-                                }
                                 var memory = echarts.init(document.getElementById("memory"));
                                 memory.setOption(
                                     {
