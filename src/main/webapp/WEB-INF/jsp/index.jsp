@@ -226,12 +226,19 @@
                                             data:['Total','Used','Free']
                                         },
                                         xAxis: {
-                                            type: 'category',
-
-                                            data: []
+                                            type: 'time',
+                                            data: [],
+                                            splitLine: {
+                                                show: false
+                                            }
                                         },
                                         yAxis: {
-                                            type: 'value'
+                                            type: 'value',
+                                            name:'M',
+                                            boundaryGap: [0, '100%'],
+                                            splitLine: {
+                                                show: false
+                                            }
                                         },series: [{
                                             name:'Total',
                                             type:'line',
@@ -247,22 +254,24 @@
                                         }
                                     ]}
                                 );
-                                var cate=[];
                                 var total=[];
                                 var used=[];
                                 var free=[];
+                                function returnData(date,value){
+                                    var now = new Date(parseInt(date) * 1000);
+                                    return {
+                                        name:now.toString(),
+                                        value:[[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/')+' '+[now.getHours(),now.getMinutes(),now.getSeconds()].join(':'),value/1024]
+                                    }
+                                }
                                 $.get('../memory/hour').done(function (data) {
                                     //填入数据
                                     for(var i=0;i<data.length;i++){
-                                        cate.push(getLocalTime(data[i].time));
-                                        total.push(data[i].memoryTotal);
-                                        used.push(data[i].memoryUsed);
-                                        free.push(data[i].memoryFree);
+                                        total.push(returnData(data[i].time,data[i].memoryTotal));
+                                        used.push(returnData(data[i].time,data[i].memoryUsed));
+                                        free.push(returnData(data[i].time,data[i].memoryFree));
                                     }
                                     memory.setOption({
-                                        xAxis: {
-                                            data: cate
-                                        },
                                         series: [{
                                             // 根据名字对应到相应的系列
                                             name: 'total',
@@ -275,7 +284,33 @@
                                             data: free
                                         }]
                                     })
-                                })
+                                });
+                                setInterval(function () {
+                                    $.get('/memory/update').done(function () {
+                                        total.push(returnData(data[0].time,data[i].memoryTotal));
+                                        used.push(returnData(data[0].time,data[i].memoryUsed));
+                                        free.push(returnData(data[0].time,data[i].memoryFree));
+                                        memory.setOption({
+                                            series: [{
+                                                // 根据名字对应到相应的系列
+                                                name: 'total',
+                                                data: total
+                                            },{
+                                                name: 'Used',
+                                                data: used
+                                            },{
+                                                name: 'Free',
+                                                data: free
+                                            }]
+                                        })
+                                    });
+
+                                    memory.setOption({
+                                        series: [{
+                                            data: data
+                                        }]
+                                    });
+                                }, 1000);
                             </script>
                         </div>
 
