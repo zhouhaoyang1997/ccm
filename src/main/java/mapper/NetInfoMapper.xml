@@ -240,9 +240,4 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-<!--自定义sql-->
-    <!--获取最新的数据-->
-    <select id="selectNewInfoByHour" resultMap="BaseResultMap" parameterType="String">
-        SELECT * FROM net_info WHERE Ip_id=#{ip} ORDER BY time DESC limit 0,20
-    </select>
 </mapper>

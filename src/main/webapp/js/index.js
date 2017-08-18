@@ -2,16 +2,6 @@
  * Created by 18236 on 2017/8/17.
  */
 
-$(function () {
-   $.ajax({
-       type:'get',
-       contentType:'json',
-       url:'/server/vm?ip='+$("#firstData").data('server'),
-       success:function (data) {
-           fill(data);
-       }
-   })
-});
 
 function act(ip){
     $.ajax({
@@ -37,7 +27,7 @@ function fill(data){
     '<thead><tr><th class="table-id">IP</th><th class="table-type">服务器Ip</th><th class="table-title">CPU利用率</th><th class="table-set">内存利用率</th>'+
     '<th class="table-author am-hide-sm-only">流量(入/出)</th> <th class="table-date am-hide-sm-only">开机时间</th></tr></thead><tbody>';
     for(x in data.vm){
-        html+= '<tr><td><a href="/vmDetail?ip="'+data.vm[x].ipId+'>'+data.vm[x].ipId+'</a></td><td>'+data.vm[x].serverIp+'</td><td><a href="#"><span class="progress">'+
+        html+= '<tr><td><a href="/vmDetail?ip='+data.vm[x].ipId+'">'+data.vm[x].ipId+'</a></td><td>'+data.vm[x].serverIp+'</td><td><a href="#"><span class="progress">'+
             '<div class="progress-bar am-progress-bar-success" style="width:'+toPercent(data.vm[x].cpuUtilization)+'">'+
             toPercent(data.vm[x].cpuUtilization)+'</div></span>'+
             '</a></td><td><a href="#"><span class="progress">'+

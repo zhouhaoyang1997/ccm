@@ -72,7 +72,9 @@ public class MainController {
     }
 
     @RequestMapping("/vmDetail")
-    public String vmDetail(String ip){
+    public String vmDetail(String ip,HttpServletRequest req){
+        Map<String,List<String>> clusterAndServ = mainService.getAllClusterAndServ();
+        req.setAttribute("clusterAndServ",clusterAndServ);
         return "vmDetail";
     }
 

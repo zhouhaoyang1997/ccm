@@ -31,5 +31,4 @@ public interface NetInfoMapper {
 
     int updateByExample(@Param("record") NetInfo record, @Param("example") NetInfoExample example);
 
-    List<NetInfo> selectNewInfoByHour(String ip);
 }

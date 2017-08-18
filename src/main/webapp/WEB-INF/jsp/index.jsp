@@ -12,6 +12,18 @@
     <script src="../js/jquery.min.js"></script>
     <script src="../js/echarts.min.js"></script>
     <script src="../js/index.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                type:'get',
+                contentType:'json',
+                url:'/server/vm?ip='+$("#firstData").data('server'),
+                success:function (data) {
+                    fill(data);
+                }
+            })
+        });
+    </script>
     <title>CCM</title>
 </head>
 <body>
@@ -44,15 +56,18 @@
                             <c:forEach var="serv" varStatus="status" items="${cluster.value}">
                                 <c:if test="${status.index==0}">
                                     <li>
-                                        <a href="javascript:;" onclick="act('${serv}')" id="firstData" data-server="${serv}">
-                                            <span style="margin-left:30px"><i class="am-icon-television"></i>${serv}</span>
+                                        <a href="javascript:;" onclick="act('${serv}')" id="firstData"
+                                           data-server="${serv}">
+                                            <span style="margin-left:30px"><i
+                                                    class="am-icon-television"></i>${serv}</span>
                                         </a>
                                     </li>
                                 </c:if>
                                 <c:if test="${status.index!=0}">
                                     <li>
                                         <a href="javascript:;" onclick="act('${serv}')">
-                                            <span style="margin-left:30px"><i class="am-icon-television"></i>${serv}</span>
+                                            <span style="margin-left:30px"><i
+                                                    class="am-icon-television"></i>${serv}</span>
                                         </a>
                                     </li>
                                 </c:if>
@@ -72,12 +87,8 @@
     </div>
 
 
-
 </div>
 
-        </div>
-    </div>
-</div>
 <script src="../js/amazeui.min.js"></script>
 <script src="../js/iscroll.js"></script>
 <script src="../js/app.js"></script>
