@@ -13,4 +13,9 @@ public class MainController {
     public String test() {
         return "index";
     }
+    @RequestMapping("/net")
+    public String test1() {
+        return "net";
+    }
+
 }
