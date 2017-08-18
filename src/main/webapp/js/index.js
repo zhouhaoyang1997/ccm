@@ -18,9 +18,11 @@ function toLocalString(nS){
     return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
 }
 function toPercent(num){
-    return (num * 100).toString().substring(0,4) + "%";
+    return twoFixed(num * 100) + "%";
 }
-
+function twoFixed(num){
+    return num.toFixed(2);
+}
 
 function fill(data){
     var html = '<div class="am-g"><div class="am-u-sm-12"><form class="am-form"><table class="am-table am-table-striped am-table-hover table-main">'+
@@ -34,11 +36,11 @@ function fill(data){
             '<div class="progress-bar am-progress-bar-success" style="width:'+toPercent(data.vm[x].memoryUtilization)+'">'+
             toPercent(data.vm[x].memoryUtilization)+'</div></span>'+
             '</a></td><td class="am-hide-sm-only"><a href="#">' +
-            data.vm[x].receive+'/'+data.vm[x].sent+'kbps</a></td>' +
+            twoFixed(data.vm[x].receive)+'/'+twoFixed(data.vm[x].sent)+'kbps</a></td>' +
             '<td class="am-hide-sm-only">'+toLocalString(data.vm[x].bootTime)+'</td></tr>';
     }
     html+='</tbody></table><hr></form></div></div>';
-    document.getElementById("filling").innerHTML='<div class="tpl-portlet">'+
+    document.getElementById("filling").innerHTML='<div class="row" style="margin-left:30px" ></div><div class="tpl-portlet">'+
         '<div class="tpl-portlet-title">'+
         '<div class="tpl-caption font-green ">'+
         '<span>'+data.cluster+' > '+data.server+'</span>'+

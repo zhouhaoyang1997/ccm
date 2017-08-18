@@ -80,10 +80,8 @@
         </div>
     </div>
 
-    <div class="tpl-content-wrapper">
-        <div class="row" style="margin-left:30px" id="filling">
+    <div class="tpl-content-wrapper" id="filling">
 
-        </div>
     </div>
 
 

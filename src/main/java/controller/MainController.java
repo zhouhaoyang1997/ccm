@@ -44,7 +44,7 @@ public class MainController {
     @ResponseBody
     public Server getCluster(String ip){
         Server server = new Server();
-        List<Summary> summarys = mainService.getSummaryByIp(ip);
+        List<Summary> summarys = mainService.getSummaryByServerIp(ip);
         if(summarys!=null){
             List<Vm> vms = new ArrayList<Vm>();
             for(Summary summary:summarys){
@@ -60,8 +60,8 @@ public class MainController {
                 vm.setCpuUtilization(0.6);//不知道怎么算......
                 //net send and receive
                 NetInfo netInfo = mainService.getLastedNetInfo(summary.getIpId());
-                vm.setSent(netInfo.getNetIobytessent());
-                vm.setReceive(netInfo.getNetIobytesrecv());
+                vm.setSent(netInfo.getNetIobytessent()/1024);
+                vm.setReceive(netInfo.getNetIobytesrecv()/1024);
                 vms.add(vm);
             }
             server.setVm(vms);
@@ -75,6 +75,8 @@ public class MainController {
     public String vmDetail(String ip,HttpServletRequest req){
         Map<String,List<String>> clusterAndServ = mainService.getAllClusterAndServ();
         req.setAttribute("clusterAndServ",clusterAndServ);
+        Summary summary = mainService.getSummaryByIp(ip);
+        req.setAttribute("vm",summary);
         return "vmDetail";
     }
 

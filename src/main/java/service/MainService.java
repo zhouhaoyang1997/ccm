@@ -67,9 +67,20 @@ public class MainService {
      * @param serverIp
      * @return
      */
-    public List<Summary> getSummaryByIp(String serverIp){
+    public List<Summary> getSummaryByServerIp(String serverIp){
         SummaryExample summaryExample = new SummaryExample();
         summaryExample.createCriteria().andServerIpEqualTo(serverIp);
         return summaryMapper.selectByExample(summaryExample);
+    }
+
+    /**
+     * 根据ip获取汇总信息
+     * @param ip
+     * @return
+     */
+    public Summary getSummaryByIp(String ip){
+        SummaryExample summaryExample = new SummaryExample();
+        summaryExample.createCriteria().andIpIdEqualTo(ip);
+        return summaryMapper.selectByExample(summaryExample).get(0);
     }
 }

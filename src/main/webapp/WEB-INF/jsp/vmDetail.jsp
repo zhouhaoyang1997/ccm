@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="../css/app.css">
     <script src="../js/jquery.min.js"></script>
     <script src="../js/echarts.min.js"></script>
+    <script src="../js/echarts-liquidfill.js"></script>
     <script src="../js/index.js"></script>
+
     <title>CCM</title>
 </head>
 <body>
@@ -75,13 +77,66 @@
         </div>
     </div>
 
-    <div class="tpl-content-wrapper">
-        <div class="row" style="margin-left:30px" id="filling">
-
+    <div class="tpl-content-wrapper" id="filling">
+        <div class="row" style="margin-left:15px" >
+            <div class="tpl-content-page-title">
+                ${vm.ipId}
+            </div>
+            <ol class="am-breadcrumb">
+                <li><a href="../index" class="am-icon-home">首页</a></li>
+                <li><a href="javascript:;" onclick="act('${vm.serverIp}')">${vm.serverIp}</a></li>
+                <li class="am-active">${vm.ipId}</li>
+            </ol>
+            <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        信息总览
+                    </div>
+                    <div class="tpl-portlet-input tpl-fz-ml">
+                        <div class="portlet-input input-small input-inline">
+                            <div class="input-icon right">
+                                <a href="#">5分钟后自动更新</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="am-g">
+        <!-- Row start -->
+        <div class="am-u-md-3">
+            <div class="card-box" style="background-color: #ffffff">
+                <h4 class="header-title m-t-0" align="center">CPU</h4>
+                <div id="cpu" style="height: 345px"></div>
+            </div>
+        </div>
 
+        <div class="am-u-md-3">
+            <div class="card-box" style="background-color: #ffffff">
+                <h4 class="header-title m-t-0" align="center">内存</h4>
+                <div id="memory" style="height: 345px"></div>
+            </div>
+        </div>
 
+        <div class="am-u-md-3">
+            <div class="card-box" style="background-color: #ffffff">
+                <h4 class="header-title m-t-0" align="center">网络</h4>
+                <div id="net" style="height: 345px;">
+
+                </div>
+            </div>
+        </div>
+        <div class="am-u-md-3">
+            <div class="card-box" style="background-color: #ffffff">
+                <h4 class="header-title m-t-0" align="center">磁盘IO</h4>
+                <div id="io" style="height: 345px;"></div>
+            </div>
+        </div>
+        <!-- Row end -->
+    </div>
+
+    </div>
 </div>
+<script src="../js/vmDetail.js"></script>
 </body>
 </html>
