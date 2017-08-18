@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <classPathEntry
-            location="H:\happy\target\happy-1.0-SNAPSHOT\WEB-INF\lib\mysql-connector-java-5.1.30.jar"/>
+            location="C:/mysql-connector-java-5.1.40-bin.jar"/>
     <context id="my" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="true"/>
@@ -17,18 +17,18 @@
                         password="123456"/>
 
         <javaModelGenerator targetPackage="pojo"
-                            targetProject="D:\ccm\src\main\java">
+                            targetProject="C:\Users\18236\Desktop\ccm\src\main\java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <sqlMapGenerator targetPackage="mapper"
-                         targetProject="D:\ccm\src\main\java">
+                         targetProject="C:\Users\18236\Desktop\ccm\src\main\java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <javaClientGenerator targetPackage="mapper"
-                             targetProject="D:\ccm\src\main\java" type="XMLMAPPER">
+                             targetProject="C:\Users\18236\Desktop\ccm\src\main\java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
@@ -37,10 +37,7 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 
-        <table schema="" tableName="cpu_info"/>
-        <table schema="" tableName="disk_info"/>
-        <table schema="" tableName="memory_info"/>
-        <table schema="" tableName="net_info"/>
+        <table schema="" tableName="summary"/>
     </context>
 </generatorConfiguration>
 

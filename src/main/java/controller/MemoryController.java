@@ -26,9 +26,4 @@ public class MemoryController {
         return memoryService.getMemoryByHour("10.12.51.105");
     }
 
-    @RequestMapping("/update")
-    @ResponseBody
-    public MemoryInfo getUpdateMemory(){
-        return memoryService.getUpdateMemory("10.12.51.105").get(0);
-    }
 }

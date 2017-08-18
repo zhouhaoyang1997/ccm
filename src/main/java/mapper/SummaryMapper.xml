@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.SummaryMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Summary" >
+    <id column="Ip_id" property="ipId" jdbcType="CHAR" />
+    <result column="Cluster" property="cluster" jdbcType="CHAR" />
+    <result column="Server_Ip" property="serverIp" jdbcType="CHAR" />
+    <result column="Boot_Time" property="bootTime" jdbcType="DOUBLE" />
+    <result column="Cpu_Count" property="cpuCount" jdbcType="DOUBLE" />
+    <result column="Cpu_Logical" property="cpuLogical" jdbcType="DOUBLE" />
+  </resultMap>
+  <!-- 获取所有集群-->
+  <select id="getAllCluster" resultType="String">
+    SELECT Cluster from summary GROUP BY Cluster
+  </select>
+
+  <select id="getAllServByCluster" resultType="String" parameterType="String">
+    SELECT Server_Ip from summary WHERE Cluster=#{cluster} GROUP BY Server_Ip
+  </select>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Ip_id, Cluster, Server_Ip, Boot_Time, Cpu_Count, Cpu_Logical
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pojo.SummaryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from summary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from summary
+    where Ip_id = #{ipId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from summary
+    where Ip_id = #{ipId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="pojo.SummaryExample" >
+    delete from summary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="pojo.Summary" >
+    insert into summary (Ip_id, Cluster, Server_Ip, 
+      Boot_Time, Cpu_Count, Cpu_Logical
+      )
+    values (#{ipId,jdbcType=CHAR}, #{cluster,jdbcType=CHAR}, #{serverIp,jdbcType=CHAR}, 
+      #{bootTime,jdbcType=DOUBLE}, #{cpuCount,jdbcType=DOUBLE}, #{cpuLogical,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Summary" >
+    insert into summary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ipId != null" >
+        Ip_id,
+      </if>
+      <if test="cluster != null" >
+        Cluster,
+      </if>
+      <if test="serverIp != null" >
+        Server_Ip,
+      </if>
+      <if test="bootTime != null" >
+        Boot_Time,
+      </if>
+      <if test="cpuCount != null" >
+        Cpu_Count,
+      </if>
+      <if test="cpuLogical != null" >
+        Cpu_Logical,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ipId != null" >
+        #{ipId,jdbcType=CHAR},
+      </if>
+      <if test="cluster != null" >
+        #{cluster,jdbcType=CHAR},
+      </if>
+      <if test="serverIp != null" >
+        #{serverIp,jdbcType=CHAR},
+      </if>
+      <if test="bootTime != null" >
+        #{bootTime,jdbcType=DOUBLE},
+      </if>
+      <if test="cpuCount != null" >
+        #{cpuCount,jdbcType=DOUBLE},
+      </if>
+      <if test="cpuLogical != null" >
+        #{cpuLogical,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="pojo.SummaryExample" resultType="java.lang.Integer" >
+    select count(*) from summary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update summary
+    <set >
+      <if test="record.ipId != null" >
+        Ip_id = #{record.ipId,jdbcType=CHAR},
+      </if>
+      <if test="record.cluster != null" >
+        Cluster = #{record.cluster,jdbcType=CHAR},
+      </if>
+      <if test="record.serverIp != null" >
+        Server_Ip = #{record.serverIp,jdbcType=CHAR},
+      </if>
+      <if test="record.bootTime != null" >
+        Boot_Time = #{record.bootTime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cpuCount != null" >
+        Cpu_Count = #{record.cpuCount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.cpuLogical != null" >
+        Cpu_Logical = #{record.cpuLogical,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update summary
+    set Ip_id = #{record.ipId,jdbcType=CHAR},
+      Cluster = #{record.cluster,jdbcType=CHAR},
+      Server_Ip = #{record.serverIp,jdbcType=CHAR},
+      Boot_Time = #{record.bootTime,jdbcType=DOUBLE},
+      Cpu_Count = #{record.cpuCount,jdbcType=DOUBLE},
+      Cpu_Logical = #{record.cpuLogical,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Summary" >
+    update summary
+    <set >
+      <if test="cluster != null" >
+        Cluster = #{cluster,jdbcType=CHAR},
+      </if>
+      <if test="serverIp != null" >
+        Server_Ip = #{serverIp,jdbcType=CHAR},
+      </if>
+      <if test="bootTime != null" >
+        Boot_Time = #{bootTime,jdbcType=DOUBLE},
+      </if>
+      <if test="cpuCount != null" >
+        Cpu_Count = #{cpuCount,jdbcType=DOUBLE},
+      </if>
+      <if test="cpuLogical != null" >
+        Cpu_Logical = #{cpuLogical,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where Ip_id = #{ipId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Summary" >
+    update summary
+    set Cluster = #{cluster,jdbcType=CHAR},
+      Server_Ip = #{serverIp,jdbcType=CHAR},
+      Boot_Time = #{bootTime,jdbcType=DOUBLE},
+      Cpu_Count = #{cpuCount,jdbcType=DOUBLE},
+      Cpu_Logical = #{cpuLogical,jdbcType=DOUBLE}
+    where Ip_id = #{ipId,jdbcType=CHAR}
+  </update>
+</mapper>

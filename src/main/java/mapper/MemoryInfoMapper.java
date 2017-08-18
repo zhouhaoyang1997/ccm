@@ -10,7 +10,7 @@ public interface MemoryInfoMapper {
 
     List<MemoryInfo> selectNewInfoByHour(String ip);
 
-    List<MemoryInfo> selectUpdateMemory(String ip);
+    List<MemoryInfo> selectLatestMemory(String ip);
 
     int countByExample(MemoryInfoExample example);
 

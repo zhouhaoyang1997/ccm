@@ -7,6 +7,9 @@ import pojo.CpuInfo;
 import pojo.CpuInfoExample;
 
 public interface CpuInfoMapper {
+
+    List<CpuInfo> selectLastedCpuInfo(String ip);
+
     int countByExample(CpuInfoExample example);
 
     int deleteByExample(CpuInfoExample example);

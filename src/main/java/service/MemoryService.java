@@ -27,7 +27,4 @@ public class MemoryService {
         return memoryInfoMapper.selectNewInfoByHour(ip);
     }
 
-    public List<MemoryInfo> getUpdateMemory(String ip){
-        return memoryInfoMapper.selectUpdateMemory(ip);
-    }
 }
