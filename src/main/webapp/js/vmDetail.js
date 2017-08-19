@@ -23,16 +23,9 @@ $(function () {
         }, tooltip: {
             formatter: "{a} <br/>{c} {b}"
         },
-        toolbox: {
-            show: true,
-            feature: {
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
         series: [
             {
-                name: '计划施工项目数（个）',
+                name: '磁盘写速率 次/秒',
                 type: 'gauge',
                 center: ['68%', '68%'],    // 默认全局居中
                 radius: '50%',
@@ -62,15 +55,10 @@ $(function () {
                 title: {
                     offsetCenter: [0, '-30%'],       // x, y，单位px
                 },
-                detail: {
-                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                        fontWeight: 'bolder'
-                    }
-                },
-                data: [{value: 40, name: '写 次/秒'}]
+                data: [{value: 40, name: '写'}]
             },
             {
-                name: '计划施工项目数（个）',
+                name: '磁盘写速率 次/秒',
                 type: 'gauge',
                 center: ['28%', '38%'],    // 默认全局居中
                 radius: '50%',
@@ -105,7 +93,7 @@ $(function () {
                         fontWeight: 'bolder'
                     }
                 },
-                data: [{value: 40, name: '写 次/秒'}]
+                data: [{value: 40, name: '读'}]
             }
         ]
     });

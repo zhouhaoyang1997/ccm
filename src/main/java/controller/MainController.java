@@ -73,11 +73,23 @@ public class MainController {
 
     @RequestMapping("/vmDetail")
     public String vmDetail(String ip,HttpServletRequest req){
+        //考虑将左侧边栏 和 当前位置封装 重复代码过多
         Map<String,List<String>> clusterAndServ = mainService.getAllClusterAndServ();
         req.setAttribute("clusterAndServ",clusterAndServ);
         Summary summary = mainService.getSummaryByIp(ip);
         req.setAttribute("vm",summary);
         return "vmDetail";
     }
+
+    @RequestMapping("/memory/detail")
+    public String detail(String ip,HttpServletRequest req){
+        Map<String,List<String>> clusterAndServ = mainService.getAllClusterAndServ();
+        req.setAttribute("clusterAndServ",clusterAndServ);
+        Summary summary = mainService.getSummaryByIp(ip);
+        req.setAttribute("vm",summary);
+        return "memory";
+    }
+
+
 
 }

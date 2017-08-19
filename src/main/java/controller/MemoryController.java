@@ -19,6 +19,11 @@ public class MemoryController {
     @Autowired
     public MemoryService memoryService;
 
+
+
+
+
+
     @RequestMapping("/hour")
     @ResponseBody
     public List<MemoryInfo> getMemory(){

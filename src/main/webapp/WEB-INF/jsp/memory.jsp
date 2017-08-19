@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 18236
-  Date: 2017/8/18
-  Time: 13:04
+  Date: 2017/8/19
+  Time: 10:23
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -18,12 +18,11 @@
     <link rel="stylesheet" href="../css/app.css">
     <script src="../js/jquery.min.js"></script>
     <script src="../js/echarts.min.js"></script>
-    <script src="../js/echarts-liquidfill.js"></script>
     <script src="../js/index.js"></script>
-
     <title>CCM</title>
 </head>
 <body>
+
 <header class="am-topbar am-topbar-inverse admin-header">
     <div class="am-topbar-brand">
         <a href="javascript:;" class="tpl-logo">
@@ -31,6 +30,8 @@
         </a>
     </div>
 </header>
+
+
 <div class="tpl-page-container tpl-page-header-fixed">
 
 
@@ -90,7 +91,7 @@
             <div class="tpl-portlet-components">
                 <div class="portlet-title">
                     <div class="caption font-green bold">
-                        信息总览
+                        内存监控详情
                     </div>
                     <div class="tpl-portlet-input tpl-fz-ml">
                         <div class="portlet-input input-small input-inline">
@@ -100,43 +101,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="tpl-echarts" style="background:#ffffff">
+                    <div id="memory" style="width:100%;min-height:500px"></div>
+                </div>
             </div>
-        </div>
-    <div class="am-g">
-        <!-- Row start -->
-        <div class="am-u-md-3">
-            <div class="card-box" style="background-color: #ffffff">
-                <h4 class="header-title m-t-0" align="center">CPU</h4>
-                <a href="../cpu/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情"><div id="cpu" style="height: 345px"></div></a>
-            </div>
-        </div>
 
-        <div class="am-u-md-3">
-            <div class="card-box" style="background-color: #ffffff">
-                <h4 class="header-title m-t-0" align="center">内存</h4>
-                <a href="../memory/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情"><div id="memory" style="height: 345px"></div></a>
-            </div>
         </div>
-
-        <div class="am-u-md-3">
-            <div class="card-box" style="background-color: #ffffff">
-                <h4 class="header-title m-t-0" align="center">网络</h4>
-                <a href="../network/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情"><div id="net" style="height: 345px;">
-
-                </div></a>
-            </div>
-        </div>
-        <div class="am-u-md-3">
-            <div class="card-box" style="background-color: #ffffff">
-                <h4 class="header-title m-t-0" align="center">磁盘IO</h4>
-                <a href="../io/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情"><div id="io" style="height: 345px;"></div></a>
-            </div>
-        </div>
-        <!-- Row end -->
-    </div>
-
     </div>
 </div>
-<script src="../js/vmDetail.js"></script>
+
+<script src="../js/memory.js"></script>
 </body>
 </html>
