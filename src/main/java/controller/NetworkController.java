@@ -23,4 +23,10 @@ public class NetworkController {
     public List<NetInfo> getNetwork(){
         return networkService.getNetworkByHour("10.12.51.158");
     }
+
+    @RequestMapping("/current")
+    @ResponseBody
+    public List<NetInfo> getCurrentNetworkInfo(String ip){
+        return networkService.getNetworkByHour(ip);
+    }
 }

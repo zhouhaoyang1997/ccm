@@ -7,11 +7,15 @@ import pojo.CpuInfo;
 import pojo.MemoryInfo;
 import pojo.NetInfo;
 import pojo.Summary;
+import service.CpuService;
 import service.MainService;
+import service.MemoryService;
+import service.NetworkService;
 import vo.Server;
 import vo.Vm;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,11 +30,24 @@ public class MainController {
     @Autowired
     public MainService mainService;
 
+    @Autowired
+    public CpuService cpuService;
+
+    @Autowired
+    public MemoryService memoryService;
+
+    @Autowired
+    public NetworkService networkService;
+
     @RequestMapping("/index")
     public String test(HttpServletRequest req) {
         //请求到所有的集群,并获取该集群下的所有服务器
-        Map<String,List<String>> clusterAndServ = mainService.getAllClusterAndServ();
-        req.setAttribute("clusterAndServ",clusterAndServ);
+
+        HttpSession session = req.getSession();
+        if(session.getAttribute("clusterAndServ")==null){
+            Map<String,List<String>> clusterAndServ = mainService.getAllClusterAndServ();
+            session.setAttribute("clusterAndServ",clusterAndServ);
+        }
 
         return "index";
     }
@@ -53,13 +70,13 @@ public class MainController {
                 vm.setIpId(summary.getIpId());
                 vm.setServerIp(summary.getServerIp());
                 //计算内存利用率 used/total
-                MemoryInfo memoryInfo = mainService.getLastedMemoryInfo(summary.getIpId());
+                MemoryInfo memoryInfo = memoryService.getLastedMemoryInfo(summary.getIpId());
                 vm.setMemoryUtilization(memoryInfo.getMemoryUsed()/memoryInfo.getMemoryTotal());
                 //计算cpu利用率
-                CpuInfo cpuInfo = mainService.getLastedCpuInfo(summary.getIpId());
+                CpuInfo cpuInfo = cpuService.getLastedCpuInfo(summary.getIpId());
                 vm.setCpuUtilization(0.6);//不知道怎么算......
                 //net send and receive
-                NetInfo netInfo = mainService.getLastedNetInfo(summary.getIpId());
+                NetInfo netInfo = networkService.getLastedNetInfo(summary.getIpId());
                 vm.setSent(netInfo.getNetIobytessent()/1024);
                 vm.setReceive(netInfo.getNetIobytesrecv()/1024);
                 vms.add(vm);
@@ -70,26 +87,6 @@ public class MainController {
         }
         return server;
     }
-
-    @RequestMapping("/vmDetail")
-    public String vmDetail(String ip,HttpServletRequest req){
-        //考虑将左侧边栏 和 当前位置封装 重复代码过多
-        Map<String,List<String>> clusterAndServ = mainService.getAllClusterAndServ();
-        req.setAttribute("clusterAndServ",clusterAndServ);
-        Summary summary = mainService.getSummaryByIp(ip);
-        req.setAttribute("vm",summary);
-        return "vmDetail";
-    }
-
-    @RequestMapping("/memory/detail")
-    public String detail(String ip,HttpServletRequest req){
-        Map<String,List<String>> clusterAndServ = mainService.getAllClusterAndServ();
-        req.setAttribute("clusterAndServ",clusterAndServ);
-        Summary summary = mainService.getSummaryByIp(ip);
-        req.setAttribute("vm",summary);
-        return "memory";
-    }
-
 
 
 }

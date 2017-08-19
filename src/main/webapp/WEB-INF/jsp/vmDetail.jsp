@@ -80,6 +80,7 @@
     <div class="tpl-content-wrapper" id="filling">
         <div class="row" style="margin-left:15px">
             <div class="tpl-content-page-title">
+                <input type="hidden" value="${vm.ipId}" id="ipId">
                 ${vm.ipId}
             </div>
             <ol class="am-breadcrumb">

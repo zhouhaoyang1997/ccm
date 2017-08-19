@@ -1,7 +1,20 @@
+var ipid = $("#ipId").val();
 var memory = echarts.init(document.getElementById("memory"));
 var cpu = echarts.init(document.getElementById("cpu"));
 var io = echarts.init(document.getElementById("io"));
 var net = echarts.init(document.getElementById("net"));
+//小数转换
+function twoFixed(num){
+    return num.toFixed(2);
+}
+
+function returnData(date,value){
+    var now = new Date(parseInt(date) * 1000);
+    return {
+        name:now.toString(),
+        value:[[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/')+' '+[now.getHours(),now.getMinutes(),now.getSeconds()].join(':'),value/1024]
+    }
+}
 $(function () {
     memory.setOption({
         title:{
@@ -9,7 +22,6 @@ $(function () {
         },
         series: [{
             type: 'liquidFill',
-            data: [0.6],
             radius: '70%',
             outline:{
                 show:false
@@ -17,6 +29,15 @@ $(function () {
         }]
     });
 
+    $.get("/memory/current?ip="+ipid).done(function (data) {
+        var current=[];
+        current.push(data.utilization.toFixed(2));
+        memory.setOption({
+            series:[{
+                data:current
+            }]
+        })
+    });
     io.setOption({
         title:{
             text:'磁盘IO'
@@ -53,7 +74,7 @@ $(function () {
                     width: 5
                 },
                 title: {
-                    offsetCenter: [0, '-30%'],       // x, y，单位px
+                    offsetCenter: [0, '-30%']       // x, y，单位px
                 },
                 data: [{value: 40, name: '写'}]
             },
@@ -86,7 +107,7 @@ $(function () {
                     width: 5
                 },
                 title: {
-                    offsetCenter: [0, '-30%'],       // x, y，单位px
+                    offsetCenter: [0, '-30%']       // x, y，单位px
                 },
                 detail: {
                     textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
@@ -98,6 +119,27 @@ $(function () {
         ]
     });
 
+
+    $.get("/network/current?ip="+ipid).done(function (data) {
+        send=[];
+        recv=[];
+        //填入数据
+        for(var i=0;i<data.length;i++){
+            send.push(returnData(data[i].time,data[i].netIobytessent));
+            recv.push(returnData(data[i].time,data[i].netIobytesrecv));
+        }
+        net.setOption({
+            series: [{
+                // 根据名字对应到相应的系列
+                name: 'Send',
+                data: send
+            },{
+                name: 'Recv',
+                data: recv
+            }]
+        })
+    });
+
     net.setOption({
         title:{
             text:'近期网络状况'
@@ -107,7 +149,7 @@ $(function () {
         },
         tooltip:{},
         legend:{
-            data:['Total','Used','Free'],
+            data:['Send','Recv'],
             right: 'right'
         },
         xAxis: {
@@ -119,24 +161,35 @@ $(function () {
         },
         yAxis: {
             type: 'value',
-            name:'M',
+            name:'K',
             boundaryGap: [0, '100%'],
             splitLine: {
                 show: false
             }
         },series: [{
-            name:'Total',
+            name:'Send',
             type:'line',
             data: []
         },{
-            name:'Used',
+            name:'Recv',
             type:'line',
             data: []
-        },{
-            name:'Free',
-            type:'line',
-            data: []
-        }]
+        }
+        ]
+    });
+
+    $.get("/cpu/current?ip="+ipid).done(function (data) {
+        var current=[];
+        current.push({value:data.cpuUser,name:'User'});
+        current.push({value:data.cpuSystem,name:'System'});
+        current.push({value:data.cpuIdle,name:'Idle'});
+        current.push({value:data.cpuInterrupt,name:'Interrupt'});
+        current.push({value:data.cpuDpc,name:'Other'});
+        cpu.setOption({
+            series:[{
+                data:current
+            }]
+        })
     });
 
     cpu.setOption({
@@ -158,13 +211,6 @@ $(function () {
                 type: 'pie',
                 radius : '55%',
                 center: ['50%', '60%'],
-                data:[
-                    {value:335, name:'User'},
-                    {value:310, name:'IOWait'},
-                    {value:234, name:'System'},
-                    {value:135, name:'Other'},
-                    {value:1548, name:'Idle'}
-                ],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,

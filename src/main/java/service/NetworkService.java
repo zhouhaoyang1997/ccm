@@ -15,5 +15,15 @@ import java.util.List;
 public class NetworkService {
     @Autowired
     public NetInfoMapper netInfoMapper;
+
     public List<NetInfo> getNetworkByHour(String ip){return netInfoMapper.selectNewInfoByHour(ip);}
+
+    /**
+     * 获取当前net信息
+     * @param ip
+     * @return
+     */
+    public NetInfo getLastedNetInfo(String ip){
+        return netInfoMapper.selectLastedNetInfo(ip).get(0);
+    }
 }

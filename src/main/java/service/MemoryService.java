@@ -27,4 +27,12 @@ public class MemoryService {
         return memoryInfoMapper.selectNewInfoByHour(ip);
     }
 
+    /**
+     * 获取当前的内存信息
+     * @param ip
+     * @return
+     */
+    public MemoryInfo getLastedMemoryInfo(String ip){
+        return memoryInfoMapper.selectLatestMemory(ip).get(0);
+    }
 }

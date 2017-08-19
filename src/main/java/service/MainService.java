@@ -21,29 +21,6 @@ public class MainService {
     @Autowired
     public SummaryMapper summaryMapper;
 
-    @Autowired
-    public CpuInfoMapper cpuInfoMapper;
-
-    @Autowired
-    public MemoryInfoMapper memoryInfoMapper;
-
-    @Autowired
-    public NetInfoMapper netInfoMapper;
-
-
-    public CpuInfo getLastedCpuInfo(String ip){
-        return cpuInfoMapper.selectLastedCpuInfo(ip).get(0);    //暂不考虑为空的问题
-       // return cpuInfoMapper.selectLastedCpuInfo(ip)==null?null:cpuInfoMapper.selectLastedCpuInfo(ip).get(0);
-    }
-
-    public MemoryInfo getLastedMemoryInfo(String ip){
-        return memoryInfoMapper.selectLatestMemory(ip).get(0);
-    }
-
-    public NetInfo getLastedNetInfo(String ip){
-        return netInfoMapper.selectLastedNetInfo(ip).get(0);
-    }
-
     /**
      * 获取所有集群
      * @return
