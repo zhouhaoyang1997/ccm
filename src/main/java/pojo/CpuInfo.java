@@ -5,15 +5,17 @@ public class CpuInfo {
 
     private Double time;
 
-    private Double cpuUser;
+    private Float cpuUser;
 
-    private Double cpuSystem;
+    private Float cpuSystem;
 
-    private Double cpuIdle;
+    private Float cpuIdle;
 
-    private Double cpuInterrupt;
+    private Float cpuPercent;
 
-    private Double cpuDpc;
+    private Float cpuInterrupt;
+
+    private Float cpuDpc;
 
     public String getIpId() {
         return ipId;
@@ -31,43 +33,51 @@ public class CpuInfo {
         this.time = time;
     }
 
-    public Double getCpuUser() {
+    public Float getCpuUser() {
         return cpuUser;
     }
 
-    public void setCpuUser(Double cpuUser) {
+    public void setCpuUser(Float cpuUser) {
         this.cpuUser = cpuUser;
     }
 
-    public Double getCpuSystem() {
+    public Float getCpuSystem() {
         return cpuSystem;
     }
 
-    public void setCpuSystem(Double cpuSystem) {
+    public void setCpuSystem(Float cpuSystem) {
         this.cpuSystem = cpuSystem;
     }
 
-    public Double getCpuIdle() {
+    public Float getCpuIdle() {
         return cpuIdle;
     }
 
-    public void setCpuIdle(Double cpuIdle) {
+    public void setCpuIdle(Float cpuIdle) {
         this.cpuIdle = cpuIdle;
     }
 
-    public Double getCpuInterrupt() {
+    public Float getCpuPercent() {
+        return cpuPercent;
+    }
+
+    public void setCpuPercent(Float cpuPercent) {
+        this.cpuPercent = cpuPercent;
+    }
+
+    public Float getCpuInterrupt() {
         return cpuInterrupt;
     }
 
-    public void setCpuInterrupt(Double cpuInterrupt) {
+    public void setCpuInterrupt(Float cpuInterrupt) {
         this.cpuInterrupt = cpuInterrupt;
     }
 
-    public Double getCpuDpc() {
+    public Float getCpuDpc() {
         return cpuDpc;
     }
 
-    public void setCpuDpc(Double cpuDpc) {
+    public void setCpuDpc(Float cpuDpc) {
         this.cpuDpc = cpuDpc;
     }
 }

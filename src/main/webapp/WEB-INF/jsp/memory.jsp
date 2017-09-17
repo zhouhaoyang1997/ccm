@@ -81,6 +81,7 @@
     <div class="tpl-content-wrapper" id="filling">
         <div class="row" style="margin-left:15px">
             <div class="tpl-content-page-title">
+                <input type="hidden" value="${vm.ipId}" id="ipId">
                 ${vm.ipId}
             </div>
             <ol class="am-breadcrumb">
@@ -96,7 +97,7 @@
                     <div class="tpl-portlet-input tpl-fz-ml">
                         <div class="portlet-input input-small input-inline">
                             <div class="input-icon right">
-                                <a href="#">5分钟后自动更新</a>
+                                 <a href="javascript:;" onclick="getData()"><i class="am-icon-refresh"></i> 5分钟后自动更新</a>
                             </div>
                         </div>
                     </div>

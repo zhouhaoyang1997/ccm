@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="../css/app.css">
     <script src="../js/jquery.min.js"></script>
     <script src="../js/echarts.min.js"></script>
-
+    <script src="../js/index.js"></script>
     <title>CCM</title>
 </head>
 <body>
+
 <header class="am-topbar am-topbar-inverse admin-header">
     <div class="am-topbar-brand">
         <a href="javascript:;" class="tpl-logo">
@@ -22,6 +23,8 @@
         </a>
     </div>
 </header>
+
+
 <div class="tpl-page-container tpl-page-header-fixed">
 
 
@@ -31,293 +34,76 @@
         </div>
         <div class="tpl-left-nav-list">
             <ul class="tpl-left-nav-menu">
-                <li class="tpl-left-nav-item">
-                    <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                        <i class="am-icon-bar-chart"></i>
-                        <span>xx集群</span>
-                        <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
-                    </a>
-                    <ul class="tpl-left-nav-sub-menu">
-                        <li>
-                            <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                                <span style="margin-left:30px"><i class="am-icon-television"></i>xx服务器</span>
-                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
-                            </a>
-                            <ul class="tpl-left-nav-sub-menu" style="margin-left:25px">
-                                <li>
-                                    <a href="#">
-                                        <span>xx虚拟机</span>
-                                    </a>
+                <c:forEach var="cluster" items="${clusterAndServ}">
 
-                                    <a href="#">
-                                        <span>xx服务器</span>
-                                    </a>
+                    <li class="tpl-left-nav-item">
+                        <a href="javascript:;" class="nav-link tpl-left-nav-link-list active">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>${cluster.key}</span>
+                            <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                        </a>
 
-                                    <a href="#">
-                                        <span>xx服务器</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                                <span style="margin-left:30px"><i class="am-icon-television"></i>xx服务器</span>
-                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
-                            </a>
-                            <ul class="tpl-left-nav-sub-menu" style="margin-left:25px">
-                                <li>
-                                    <a href="#">
-                                        <span>xx虚拟机</span>
-                                    </a>
+                        <ul class="tpl-left-nav-sub-menu" style="display:block">
+                            <c:forEach var="serv" varStatus="status" items="${cluster.value}">
+                                <c:if test="${status.index==0}">
+                                    <li>
+                                        <a href="javascript:;" onclick="act('${serv}')" id="firstData"
+                                           data-server="${serv}">
+                                            <span style="margin-left:30px"><i
+                                                    class="am-icon-television"></i>${serv}</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${status.index!=0}">
+                                    <li>
+                                        <a href="javascript:;" onclick="act('${serv}')">
+                                            <span style="margin-left:30px"><i
+                                                    class="am-icon-television"></i>${serv}</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+                        </ul>
+                    </li>
 
-                                    <a href="#">
-                                        <span>xx服务器</span>
-                                    </a>
-
-                                    <a href="#">
-                                        <span>xx服务器</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                                <span style="margin-left:30px"><i class="am-icon-television"></i>xx服务器</span>
-                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
-                            </a>
-                            <ul class="tpl-left-nav-sub-menu" style="margin-left:25px">
-                                <li>
-                                    <a href="#">
-                                        <span>xx虚拟机</span>
-                                    </a>
-
-                                    <a href="#">
-                                        <span>xx虚拟机</span>
-                                    </a>
-
-                                    <a href="#">
-                                        <span>xx虚拟机</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="tpl-left-nav-item">
-                    <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                        <i class="am-icon-bar-chart"></i>
-                        <span>xx集群</span>
-                        <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
-                    </a>
-                    <ul class="tpl-left-nav-sub-menu">
-                        <li>
-                            <a href="#">
-                                <i class="am-icon-angle-right"></i>
-                                <span>xx服务器</span>
-                            </a>
-
-                            <a href="#">
-                                <i class="am-icon-angle-right"></i>
-                                <span>xx服务器</span>
-                            </a>
-
-                            <a href="#">
-                                <i class="am-icon-angle-right"></i>
-                                <span>xx服务器</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="tpl-left-nav-item">
-                    <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                        <i class="am-icon-bar-chart"></i>
-                        <span>xx集群</span>
-                        <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
-                    </a>
-                    <ul class="tpl-left-nav-sub-menu">
-                        <li>
-                            <a href="#">
-                                <i class="am-icon-angle-right"></i>
-                                <span>xx服务器</span>
-                            </a>
-
-                            <a href="#">
-                                <i class="am-icon-angle-right"></i>
-                                <span>xx服务器</span>
-                            </a>
-
-                            <a href="#">
-                                <i class="am-icon-angle-right"></i>
-                                <span>xx服务器</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="tpl-left-nav-item">
-                    <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
-                        <i class="am-icon-bar-chart"></i>
-                        <span>xx集群</span>
-                        <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
-                    </a>
-                    <ul class="tpl-left-nav-sub-menu">
-                        <li>
-                            <a href="#">
-                                <i class="am-icon-angle-right"></i>
-                                <span>xx服务器</span>
-                            </a>
-
-                            <a href="#">
-                                <i class="am-icon-angle-right"></i>
-                                <span>xx服务器</span>
-                            </a>
-
-                            <a href="#">
-                                <i class="am-icon-angle-right"></i>
-                                <span>xx服务器</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
+                </c:forEach>
             </ul>
         </div>
     </div>
 
-    <div class="tpl-content-wrapper">
-        <div class="row" style="margin-left:30px">
-            <div class="tpl-portlet">
-                <div class="tpl-portlet-title">
-                    <div class="tpl-caption font-green ">
-                        <span>集群xxx</span>
+    <div class="tpl-content-wrapper" id="filling">
+        <div class="row" style="margin-left:15px">
+            <div class="tpl-content-page-title">
+                <input type="hidden" value="${vm.ipId}" id="ipId">
+                ${vm.ipId}
+            </div>
+            <ol class="am-breadcrumb">
+                <li><a href="../index" class="am-icon-home">首页</a></li>
+                <li><a href="javascript:;" onclick="act('${vm.serverIp}')">${vm.serverIp}</a></li>
+                <li class="am-active">${vm.ipId}</li>
+            </ol>
+            <div class="tpl-portlet-components">
+                <div class="portlet-title">
+                    <div class="caption font-green bold">
+                        内存监控详情
                     </div>
-
+                    <div class="tpl-portlet-input tpl-fz-ml">
+                        <div class="portlet-input input-small input-inline">
+                            <div class="input-icon right">
+                                <a href="javascript:;" onclick="getData()"><i class="am-icon-refresh"></i> 5分钟后自动更新</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="am-tabs tpl-index-tabs" data-am-tabs>
-                    <ul class="am-tabs-nav am-nav am-nav-tabs">
-                        <li class="am-active"><a href="#tab1">CPU</a></li>
-
-                        <li><a href="#tab2">Memory</a></li>
-                        <li><a href="#tab3">Network</a></li>
-                    </ul>
-
-                    <div class="am-tabs-bd">
-                        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
-                            <div class="tpl-echarts" id="cpu">
-                            </div>
-
-                        </div>
-                        <div class="am-tab-panel am-fade" id="tab3">
-                            <div class="tpl-echarts" id="network">
-                            </div>
-                            <script type="text/javascript">
-                                var network = echarts.init(document.getElementById("network"));
-                                function getData(){
-                                    $.get('../network/hour').done(function (data) {
-                                        send=[];
-                                        recv=[];
-                                        //填入数据
-                                        for(var i=0;i<data.length;i++){
-                                            send.push(returnData(data[i].time,data[i].netIobytessent));
-                                            recv.push(returnData(data[i].time,data[i].netIobytesrecv));
-                                        }
-                                        network.setOption({
-                                            series: [{
-                                                // 根据名字对应到相应的系列
-                                                name: 'Send',
-                                                data: send
-                                            },{
-                                                name: 'Recv',
-                                                data: recv
-                                            }]
-                                        })
-                                    });
-                                }
-                                network.setOption(
-                                    {
-                                        title:{
-                                            text:'Network'
-                                        },tooltip:{},
-                                        dataZoom: [
-                                            {
-                                                id: 'dataZoomX',
-                                                type: 'slider',
-                                                xAxisIndex: [0],
-                                                filterMode: 'filter',
-                                                start: 30,
-                                                end: 70
-                                            }
-                                        ],
-                                        toolbox:{
-                                            show:true,
-                                            feature:{
-                                                myTool1: {
-                                                    show: true,
-                                                    title: '点击刷新',
-                                                    icon: 'image://http://echarts.baidu.com/images/favicon.png',
-                                                    onclick: function (){
-                                                        getData();
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        legend:{
-                                            data:['Send','Recv']
-                                        },
-                                        xAxis: {
-                                            type: 'time',
-                                            data: [],
-                                            splitLine: {
-                                                show: false
-                                            }
-                                        },
-                                        yAxis: {
-                                            type: 'value',
-                                            name:'K',
-                                            boundaryGap: [0, '100%'],
-                                            splitLine: {
-                                                show: false
-                                            }
-                                        },series: [{
-                                        name:'Send',
-                                        type:'line',
-                                        data: []
-                                    },{
-                                        name:'Recv',
-                                        type:'line',
-                                        data: []
-                                    }
-                                    ]}
-                                );
-                                var send=[];
-                                var recv=[];
-                                function returnData(date,value){
-                                    var now = new Date(parseInt(date) * 1000);
-                                    return {
-                                        name:now.toString(),
-                                        value:[[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/')+' '+[now.getHours(),now.getMinutes(),now.getSeconds()].join(':'),value/1024]
-                                    }
-                                }
-
-                                //getData();
-                                setInterval(getData(), 300*1000);
-                            </script>
-                        </div>
-
-                        <%--<div class="am-tab-panel am-fade" id="tab3">--%>
-
-                        <%--</div>--%>
-
-                    </div>
+                <div class="tpl-echarts" style="background:#ffffff">
+                    <div id="network" style="width:100%;min-height:500px"></div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-<script src="../js/amazeui.min.js"></script>
-<script src="../js/iscroll.js"></script>
-<script src="../js/app.js"></script>
+
+<script src="../js/net.js"></script>
 </body>
 </html>

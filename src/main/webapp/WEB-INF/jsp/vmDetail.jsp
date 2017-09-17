@@ -40,34 +40,24 @@
         </div>
         <div class="tpl-left-nav-list">
             <ul class="tpl-left-nav-menu">
-                <c:forEach var="cluster" items="${clusterAndServ}">
+                <c:forEach var="cluster" items="${cluster}">
 
                     <li class="tpl-left-nav-item">
                         <a href="javascript:;" class="nav-link tpl-left-nav-link-list active">
                             <i class="am-icon-bar-chart"></i>
-                            <span>${cluster.key}</span>
+                            <span>${cluster.cluster}</span>
                             <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
                         </a>
 
                         <ul class="tpl-left-nav-sub-menu" style="display:block">
-                            <c:forEach var="serv" varStatus="status" items="${cluster.value}">
-                                <c:if test="${status.index==0}">
-                                    <li>
-                                        <a href="javascript:;" onclick="act('${serv}')" id="firstData"
-                                           data-server="${serv}">
+                            <c:forEach var="serv" varStatus="status" items="${cluster.serverIp}">
+                                <li>
+                                    <a href="javascript:;" onclick="act('${serv}')"
+                                       data-server="${serv}">
                                             <span style="margin-left:30px"><i
                                                     class="am-icon-television"></i>${serv}</span>
-                                        </a>
-                                    </li>
-                                </c:if>
-                                <c:if test="${status.index!=0}">
-                                    <li>
-                                        <a href="javascript:;" onclick="act('${serv}')">
-                                            <span style="margin-left:30px"><i
-                                                    class="am-icon-television"></i>${serv}</span>
-                                        </a>
-                                    </li>
-                                </c:if>
+                                    </a>
+                                </li>
                             </c:forEach>
                         </ul>
                     </li>
@@ -96,7 +86,7 @@
                     <div class="tpl-portlet-input tpl-fz-ml">
                         <div class="portlet-input input-small input-inline">
                             <div class="input-icon right">
-                                <a href="#">5分钟后自动更新</a>
+                                <a href="#"><i class="am-icon-refresh"></i> 5分钟后自动更新</a>
                             </div>
                         </div>
                     </div>

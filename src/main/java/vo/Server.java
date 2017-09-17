@@ -1,7 +1,5 @@
 package vo;
 
-import pojo.Summary;
-
 import java.util.List;
 
 /**

@@ -11,7 +11,7 @@ public class DiskInfo {
 
     private Double diskFree;
 
-    private Double diskPercent;
+    private Float diskPercent;
 
     private Double diskIoreadcount;
 
@@ -24,18 +24,6 @@ public class DiskInfo {
     private Double diskIoreadtime;
 
     private Double diskIowritetime;
-
-    private Double diskSioreadcount;
-
-    private Double diskSiowritecount;
-
-    private Double diskSioreadbytes;
-
-    private Double diskSiowritebytes;
-
-    private Double diskSioreadtime;
-
-    private Double diskSiowritetime;
 
     public String getIpId() {
         return ipId;
@@ -77,11 +65,11 @@ public class DiskInfo {
         this.diskFree = diskFree;
     }
 
-    public Double getDiskPercent() {
+    public Float getDiskPercent() {
         return diskPercent;
     }
 
-    public void setDiskPercent(Double diskPercent) {
+    public void setDiskPercent(Float diskPercent) {
         this.diskPercent = diskPercent;
     }
 
@@ -131,53 +119,5 @@ public class DiskInfo {
 
     public void setDiskIowritetime(Double diskIowritetime) {
         this.diskIowritetime = diskIowritetime;
-    }
-
-    public Double getDiskSioreadcount() {
-        return diskSioreadcount;
-    }
-
-    public void setDiskSioreadcount(Double diskSioreadcount) {
-        this.diskSioreadcount = diskSioreadcount;
-    }
-
-    public Double getDiskSiowritecount() {
-        return diskSiowritecount;
-    }
-
-    public void setDiskSiowritecount(Double diskSiowritecount) {
-        this.diskSiowritecount = diskSiowritecount;
-    }
-
-    public Double getDiskSioreadbytes() {
-        return diskSioreadbytes;
-    }
-
-    public void setDiskSioreadbytes(Double diskSioreadbytes) {
-        this.diskSioreadbytes = diskSioreadbytes;
-    }
-
-    public Double getDiskSiowritebytes() {
-        return diskSiowritebytes;
-    }
-
-    public void setDiskSiowritebytes(Double diskSiowritebytes) {
-        this.diskSiowritebytes = diskSiowritebytes;
-    }
-
-    public Double getDiskSioreadtime() {
-        return diskSioreadtime;
-    }
-
-    public void setDiskSioreadtime(Double diskSioreadtime) {
-        this.diskSioreadtime = diskSioreadtime;
-    }
-
-    public Double getDiskSiowritetime() {
-        return diskSiowritetime;
-    }
-
-    public void setDiskSiowritetime(Double diskSiowritetime) {
-        this.diskSiowritetime = diskSiowritetime;
     }
 }

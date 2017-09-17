@@ -1,4 +1,5 @@
 var memory = echarts.init(document.getElementById("memory"));
+var ipId = $("#ipId").val();
 $(function () {
 
     memory.setOption(
@@ -18,19 +19,6 @@ $(function () {
                     end: 80
                 }
             ],
-            toolbox:{
-                show:true,
-                feature:{
-                    myTool1: {
-                        show: true,
-                        title: '刷新',
-                        icon: 'image://http://echarts.baidu.com/images/favicon.png',
-                        onclick: function (){
-                            getData();
-                        }
-                    }
-                }
-            },
             legend:{
                 data:['Total','Used','Free']
             },
@@ -69,7 +57,7 @@ $(function () {
     setInterval(getData(), 300*1000);
 });
 function getData(){
-    $.get('../memory/hour').done(function (data) {
+    $.get('../memory/hour?ip='+ipId).done(function (data) {
         var total=[];
         var used=[];
         var free=[];

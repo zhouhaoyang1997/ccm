@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.ServerMapper" >
+
+    <!--用于查询某个服务器下的所有的虚拟机 -->
+<resultMap id="Server" type="vo.Server">
+    <result property="server" column="Server_Ip" />
+    <result property="cluster" column="Cluster"/>
+    <collection property="vm" ofType="vo.Vm">
+        <result property="serverIp" column="Server_Ip"/>
+        <result property="ipId" column="Ip_id"/>
+        <result property="osPlatform" column="Os_Platform"/>
+        <result property="pcName" column="Pc_Name"/>
+        <result property="bootTime" column="Boot_Time"/>
+        <result property="cpuPercent" column="Cpu_Percent"/>
+        <result property="memoryPercent" column="Memory_percent"/>
+        <result property="sent" column="Net_IoBytesSent"/>
+        <result property="receive" column="Net_IoBytesRecv"/>
+    </collection>
+</resultMap>
+    
+    <select id="getAllVoByServerIp" parameterType="String" resultMap="Server">
+        SELECT sm1.Server_Ip,sm1.Cluster,sm2.Ip_id,sm2.Boot_Time,sm2.Os_Platform,Cpu_Percent,Memory_percent,sm2.Pc_Name,Max(cpu_info.time),Cpu_Percent,Memory_percent,Net_IoBytesSent,Net_IoBytesRecv
+         FROM summary as sm1,summary as sm2,cpu_info,memory_info,net_info
+         WHERE sm1.Server_Ip=sm2.Server_ip and sm2.Ip_id=cpu_info.Ip_id and sm2.Ip_id=memory_info.Ip_id and sm1.Server_Ip=#{serverIp}
+    </select>
+
+</mapper>

@@ -3,7 +3,21 @@ package pojo;
 public class Summary {
     private String ipId;
 
+    private String pcName;
+
     private String cluster;
+
+    private String osPlatform;
+
+    private String osVersion;
+
+    private String architecture;
+
+    private String machine;
+
+    private String node;
+
+    private String processor;
 
     private String serverIp;
 
@@ -21,12 +35,68 @@ public class Summary {
         this.ipId = ipId == null ? null : ipId.trim();
     }
 
+    public String getPcName() {
+        return pcName;
+    }
+
+    public void setPcName(String pcName) {
+        this.pcName = pcName == null ? null : pcName.trim();
+    }
+
     public String getCluster() {
         return cluster;
     }
 
     public void setCluster(String cluster) {
         this.cluster = cluster == null ? null : cluster.trim();
+    }
+
+    public String getOsPlatform() {
+        return osPlatform;
+    }
+
+    public void setOsPlatform(String osPlatform) {
+        this.osPlatform = osPlatform == null ? null : osPlatform.trim();
+    }
+
+    public String getOsVersion() {
+        return osVersion;
+    }
+
+    public void setOsVersion(String osVersion) {
+        this.osVersion = osVersion == null ? null : osVersion.trim();
+    }
+
+    public String getArchitecture() {
+        return architecture;
+    }
+
+    public void setArchitecture(String architecture) {
+        this.architecture = architecture == null ? null : architecture.trim();
+    }
+
+    public String getMachine() {
+        return machine;
+    }
+
+    public void setMachine(String machine) {
+        this.machine = machine == null ? null : machine.trim();
+    }
+
+    public String getNode() {
+        return node;
+    }
+
+    public void setNode(String node) {
+        this.node = node == null ? null : node.trim();
+    }
+
+    public String getProcessor() {
+        return processor;
+    }
+
+    public void setProcessor(String processor) {
+        this.processor = processor == null ? null : processor.trim();
     }
 
     public String getServerIp() {

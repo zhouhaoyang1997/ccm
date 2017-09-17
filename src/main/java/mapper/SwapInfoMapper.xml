@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.SwapInfoMapper" >
+  <resultMap id="BaseResultMap" type="pojo.SwapInfo" >
+    <result column="Ip_id" property="ipId" jdbcType="CHAR" />
+    <result column="time" property="time" jdbcType="DOUBLE" />
+    <result column="Swap_Total" property="swapTotal" jdbcType="DOUBLE" />
+    <result column="Swap_Used" property="swapUsed" jdbcType="DOUBLE" />
+    <result column="Swap_Free" property="swapFree" jdbcType="DOUBLE" />
+    <result column="Swap_Percent" property="swapPercent" jdbcType="DOUBLE" />
+    <result column="Swap_Sin" property="swapSin" jdbcType="DOUBLE" />
+    <result column="Swap_Sout" property="swapSout" jdbcType="DOUBLE" />
+  </resultMap>
+
+</mapper>

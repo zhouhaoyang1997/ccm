@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.VmMapper" >
+
+    <!-- 虚拟机详情-->
+    <resultMap id="Vm" type="vo.Vm">
+        <result property="serverIp" column="Server_Ip"/>
+        <result property="ipId" column="Ip_id"/>
+        <result property="osPlatform" column="Os_Platform"/>
+        <result property="pcName" column="Pc_Name"/>
+        <result property="bootTime" column="Boot_Time"/>
+        <result property="cpuPercent" column="Cpu_Percent"/>
+        <result property="memoryPercent" column="Memory_percent"/>
+        <result property="sent" column="Net_IoBytesSent"/>
+        <result property="receive" column="Net_IoBytesRecv"/>
+    </resultMap>
+
+    <select id="getLastedVm" parameterType="String" resultMap="Vm">
+        SELECT Server_Ip,Cluster,summary.Ip_id,Boot_Time,Os_Platform,Cpu_Percent,Memory_percent,Pc_Name,Max(cpu_info.time),Cpu_Percent,Memory_percent,Net_IoBytesSent,Net_IoBytesRecv
+        FROM summary,cpu_info,memory_info,net_info
+        WHERE summary.Ip_id=cpu_info.Ip_id and summary.Ip_id=memory_info.Ip_id and summary.Ip_id=#{ipId}
+    </select>
+
+</mapper>
