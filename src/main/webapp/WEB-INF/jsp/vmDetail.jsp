@@ -52,8 +52,7 @@
                         <ul class="tpl-left-nav-sub-menu" style="display:block">
                             <c:forEach var="serv" varStatus="status" items="${cluster.serverIp}">
                                 <li>
-                                    <a href="javascript:;" onclick="act('${serv}')"
-                                       data-server="${serv}">
+                                    <a href="${pageContext.request.contextPath}/serverDetail?serverIp=${serv}">
                                             <span style="margin-left:30px"><i
                                                     class="am-icon-television"></i>${serv}</span>
                                     </a>
@@ -67,7 +66,7 @@
         </div>
     </div>
 
-    <div class="tpl-content-wrapper" id="filling">
+    <div class="tpl-content-wrapper" >
         <div class="row" style="margin-left:15px">
             <div class="tpl-content-page-title">
                 <input type="hidden" value="${vm.ipId}" id="ipId">
@@ -78,53 +77,9 @@
                 <li><a href="javascript:;" onclick="act('${vm.serverIp}')">${vm.serverIp}</a></li>
                 <li class="am-active">${vm.ipId}</li>
             </ol>
-            <div class="tpl-portlet-components">
-                <div class="portlet-title">
-                    <div class="caption font-green bold">
-                        信息总览
-                    </div>
-                    <div class="tpl-portlet-input tpl-fz-ml">
-                        <div class="portlet-input input-small input-inline">
-                            <div class="input-icon right">
-                                <a href="#"><i class="am-icon-refresh"></i> 5分钟后自动更新</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <div class="am-g">
-        <!-- Row start -->
-        <div class="am-u-md-3">
-            <div class="card-box" style="background-color: #ffffff">
-                <h4 class="header-title m-t-0" align="center">CPU</h4>
-                <a href="../cpu/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情"><div id="cpu" style="height: 345px"></div></a>
-            </div>
-        </div>
 
-        <div class="am-u-md-3">
-            <div class="card-box" style="background-color: #ffffff">
-                <h4 class="header-title m-t-0" align="center">内存</h4>
-                <a href="../memory/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情"><div id="memory" style="height: 345px"></div></a>
-            </div>
+            <!-- Row end -->
         </div>
-
-        <div class="am-u-md-3">
-            <div class="card-box" style="background-color: #ffffff">
-                <h4 class="header-title m-t-0" align="center">网络</h4>
-                <a href="../network/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情"><div id="net" style="height: 345px;">
-
-                </div></a>
-            </div>
-        </div>
-        <div class="am-u-md-3">
-            <div class="card-box" style="background-color: #ffffff">
-                <h4 class="header-title m-t-0" align="center">磁盘IO</h4>
-                <a href="../io/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情"><div id="io" style="height: 345px;"></div></a>
-            </div>
-        </div>
-        <!-- Row end -->
-    </div>
 
     </div>
 </div>

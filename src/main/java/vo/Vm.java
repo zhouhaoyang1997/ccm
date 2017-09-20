@@ -42,6 +42,36 @@ public class Vm {
 
     private String bootTime;    //系统开机时间
 
+    private int cpuCount;   //cpu个数
+
+    private double memoryTotal; //memory总量
+
+    private double diskTotal;   //硬盘总量
+
+    public int getCpuCount() {
+        return cpuCount;
+    }
+
+    public void setCpuCount(int cpuCount) {
+        this.cpuCount = cpuCount;
+    }
+
+    public double getMemoryTotal() {
+        return memoryTotal;
+    }
+
+    public void setMemoryTotal(double memoryTotal) {
+        this.memoryTotal = memoryTotal;
+    }
+
+    public double getDiskTotal() {
+        return diskTotal;
+    }
+
+    public void setDiskTotal(double diskTotal) {
+        this.diskTotal = diskTotal;
+    }
+
     public String getIpId() {
         return ipId;
     }
@@ -97,7 +127,6 @@ public class Vm {
     }
 
     public void setBootTime(Long bootTime) {
-        System.out.print(bootTime);
         Date date = new Date(bootTime);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         this.bootTime = sdf.format(date);

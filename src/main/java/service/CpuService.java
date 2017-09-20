@@ -3,6 +3,7 @@ package service;
 import mapper.CpuInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pojo.CpuInfo;
 
 @Service
 public class CpuService {
@@ -11,10 +12,10 @@ public class CpuService {
     public CpuInfoMapper cpuInfoMapper;
 
     /**
-     * 获取cpu最新利用率
+     * 获取cpu最新Cpu状态
      * @return
      */
-    public Float getCpuPercent(String ipId){
-        return cpuInfoMapper.selectLastedCpuInfo(ipId).getCpuPercent();
+    public CpuInfo getCpuInfo(String ipId){
+        return cpuInfoMapper.selectLastedCpuInfo(ipId);
     }
 }

@@ -23,9 +23,37 @@ public class Summary {
 
     private Double bootTime;
 
-    private Double cpuCount;
+    private int cpuCount;
 
-    private Double cpuLogical;
+    private int cpuLogical;
+
+    private double memoryTotal;
+
+    private double diskTotal;
+
+    public void setCpuCount(int cpuCount) {
+        this.cpuCount = cpuCount;
+    }
+
+    public void setCpuLogical(int cpuLogical) {
+        this.cpuLogical = cpuLogical;
+    }
+
+    public double getMemoryTotal() {
+        return memoryTotal;
+    }
+
+    public void setMemoryTotal(double memoryTotal) {
+        this.memoryTotal = memoryTotal;
+    }
+
+    public double getDiskTotal() {
+        return diskTotal;
+    }
+
+    public void setDiskTotal(double diskTotal) {
+        this.diskTotal = diskTotal;
+    }
 
     public String getIpId() {
         return ipId;
@@ -113,21 +141,5 @@ public class Summary {
 
     public void setBootTime(Double bootTime) {
         this.bootTime = bootTime;
-    }
-
-    public Double getCpuCount() {
-        return cpuCount;
-    }
-
-    public void setCpuCount(Double cpuCount) {
-        this.cpuCount = cpuCount;
-    }
-
-    public Double getCpuLogical() {
-        return cpuLogical;
-    }
-
-    public void setCpuLogical(Double cpuLogical) {
-        this.cpuLogical = cpuLogical;
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.NetInfo;
 
+import java.util.List;
+
 @Service
 public class NetService {
 
@@ -15,7 +17,13 @@ public class NetService {
      * 获取最新的网络利用信息
      * @return
      */
-    public NetInfo getNetInfo(String ipID){
-        return netInfoMapper.selectLastedNetInfo(ipID);
+    public NetInfo getNetInfo(String ipId){
+        return netInfoMapper.selectLastedNetInfo(ipId);
+    }
+
+
+
+    public List<NetInfo> getNetInfoByNum(String ip){
+        return netInfoMapper.selectNewInfoByHour(ip);
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Server {
     private String cluster;
-    private String server;
+    private String serverIp;
     private List<Vm> vm;
 
     public void setVm(List<Vm> vm) {
@@ -19,12 +19,12 @@ public class Server {
         return vm;
     }
 
-    public String getServer() {
-        return server;
+    public String getServerIp() {
+        return serverIp;
     }
 
-    public void setServer(String server) {
-        this.server = server;
+    public void setServerIp(String serverIp) {
+        this.serverIp = serverIp;
     }
 
     public String getCluster() {
