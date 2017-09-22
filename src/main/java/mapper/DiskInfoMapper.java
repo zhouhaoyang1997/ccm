@@ -1,8 +1,9 @@
 package mapper;
 
-import java.util.List;
 import pojo.DiskInfo;
 
-public interface DiskInfoMapper {
+import java.util.List;
 
+public interface DiskInfoMapper {
+    List<DiskInfo> selectNewInfoByHour(String ip);
 }

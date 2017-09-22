@@ -15,5 +15,7 @@
     <result column="Disk_IoReadTime" property="diskIoreadtime" jdbcType="DOUBLE" />
     <result column="Disk_IoWriteTime" property="diskIowritetime" jdbcType="DOUBLE" />
   </resultMap>
-
+  <select id="selectNewInfoByHour" resultMap="BaseResultMap" parameterType="String">
+    SELECT * FROM disk_info WHERE Ip_id=#{ip} ORDER BY time DESC limit 0,120
+  </select>
 </mapper>

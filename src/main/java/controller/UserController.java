@@ -49,7 +49,7 @@ public class UserController {
         }
         HttpSession session = request.getSession();
         session.setAttribute("cluster",clusters);
-        //首页默认显示第一个服务器下的虚拟机信息
+        //首页默认显示第一个集群下的虚拟机信息
         Server server = new Server();
         String serverIp = clusters.get(0).getServerIp().get(0);
         server.setServerIp(serverIp);

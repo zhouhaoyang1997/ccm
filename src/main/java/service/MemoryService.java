@@ -3,6 +3,10 @@ package service;
 import mapper.MemoryInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pojo.DiskInfo;
+import pojo.MemoryInfo;
+
+import java.util.List;
 
 @Service
 public class MemoryService {
@@ -17,4 +21,6 @@ public class MemoryService {
     public Double getMemoryPercent(String ipId){
         return memoryInfoMapper.selectLatestMemory(ipId).getMemoryPercent();
     }
+    public List<MemoryInfo> selectNewInfoByHour(String ip){return memoryInfoMapper.selectNewInfoByHour(ip);}
+
 }

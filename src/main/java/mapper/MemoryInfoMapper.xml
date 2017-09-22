@@ -11,7 +11,7 @@
     <result column="Memory_Free" property="memoryFree" jdbcType="DOUBLE" />
   </resultMap>
   <select id="selectNewInfoByHour" resultMap="BaseResultMap" parameterType="String">
-    SELECT * FROM memory_info WHERE Ip_id=#{ip} ORDER BY time DESC limit 0,20
+    SELECT * FROM memory_info WHERE Ip_id=#{ip} ORDER BY time DESC limit 0,120
   </select>
   <select id="selectLatestMemory" resultMap="BaseResultMap" parameterType="String">
     SELECT *,MAX(time) FROM memory_info WHERE Ip_id=#{ip}

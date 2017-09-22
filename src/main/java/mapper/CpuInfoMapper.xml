@@ -11,6 +11,9 @@
     <result column="Cpu_Interrupt" property="cpuInterrupt" jdbcType="REAL" />
     <result column="Cpu_Dpc" property="cpuDpc" jdbcType="REAL" />
   </resultMap>
+  <select id="selectNewInfoByHour" resultMap="BaseResultMap" parameterType="String">
+    SELECT * FROM cpu_info WHERE Ip_id=#{ip} ORDER BY time DESC limit 0,120
+  </select>
   <select id="selectLastedCpuInfo" resultMap="BaseResultMap" parameterType="String">
     SELECT *,MAX(time) FROM cpu_info WHERE Ip_id=#{ip}
   </select>
