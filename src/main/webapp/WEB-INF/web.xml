@@ -17,6 +17,13 @@
         </init-param>
     </servlet>
     <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/img/*</url-pattern>
+        <url-pattern>/fonts/*</url-pattern>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.css</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>seckill-dispatcher</servlet-name>
         <!-- 默认匹配所有的请求 -->
         <url-pattern>/</url-pattern>

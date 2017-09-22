@@ -75,7 +75,7 @@
                             <div class="collapse in" id="collspase${idnum}">
                                 <ul class="nav">
                                     <c:forEach var="serv" items="${cluster.serverIp}">
-                                        <li><a href="${pageContext.request.contextPath}/serverDetail?serverIp=${serv}"
+                                        <li><a href="${pageContext.request.contextPath}/server?serverIp=${serv}"
                                                class="">${serv}</a></li>
                                     </c:forEach>
                                 </ul>
@@ -92,13 +92,20 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
+                <h3><span>${location.cluster}</span><i
+                        class="icon-submenu lnr lnr-chevron-right"></i><a
+                        href="/server?serverIp=${location.serverIp}">${vm.serverIp}</a><i
+                        class="icon-submenu lnr lnr-chevron-right"></i><a href="/vm?ipId=${location.ipId}">${vm.ipId}</a></h3>
+
                 <div class="panel panel-success">
                     <div class="panel-heading"><h3>信息总览</h3></div>
                     <div class="panel-body">
-                        <p>cpu核心数:</p>
-                        <p>内存大小</p>
-                        <p>名称</p>
-                        <p>系统开机时间</p>
+                        <table>
+                            <tr><td>cpu核心数:</td><td>${vm.cpuCount}核</td></tr>
+                            <tr><td>内存大小:</td><td>${vm.memoryTotal}M</td></tr>
+                            <tr><td>名称:</td><td>${vm.pcName}</td></tr>
+                            <tr><td>系统开机时间:</td><td>${vm.bootTime}</td></tr>
+                        </table>
                     </div>
                 </div>
             <div class="row">
@@ -107,7 +114,7 @@
                 <div class="col-md-3">
                     <div class="card-box" style="background-color: #ffffff">
                         <h4 class="header-title m-t-0" align="center">CPU</h4>
-                        <a href="../cpu/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情">
+                        <a href="../cpu?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情">
                             <div id="cpu" style="height: 345px"></div>
                         </a>
                     </div>
@@ -116,7 +123,7 @@
                 <div class="col-md-3">
                     <div class="card-box" style="background-color: #ffffff">
                         <h4 class="header-title m-t-0" align="center">内存</h4>
-                        <a href="../memory/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top"
+                        <a href="../memory?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top"
                            title="点击查看近期详情">
                             <div id="memory" style="height: 345px"></div>
                         </a>
@@ -126,7 +133,7 @@
                 <div class="col-md-3">
                     <div class="card-box" style="background-color: #ffffff">
                         <h4 class="header-title m-t-0" align="center">网络</h4>
-                        <a href="../network/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top"
+                        <a href="../net?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top"
                            title="点击查看近期详情">
                             <div id="net" style="height: 345px;">
 
@@ -137,7 +144,7 @@
                 <div class="col-md-3">
                     <div class="card-box" style="background-color: #ffffff">
                         <h4 class="header-title m-t-0" align="center">磁盘IO</h4>
-                        <a href="../io/detail?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情">
+                        <a href="../io?ip=${vm.ipId}" data-toggle="tooltip" data-placement="top" title="点击查看近期详情">
                             <div id="io" style="height: 345px;"></div>
                         </a>
                     </div>

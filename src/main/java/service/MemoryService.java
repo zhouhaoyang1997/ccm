@@ -7,6 +7,9 @@ import pojo.DiskInfo;
 import pojo.MemoryInfo;
 
 import java.util.List;
+import pojo.MemoryInfo;
+
+import java.util.List;
 
 @Service
 public class MemoryService {
@@ -22,5 +25,11 @@ public class MemoryService {
         return memoryInfoMapper.selectLatestMemory(ipId).getMemoryPercent();
     }
     public List<MemoryInfo> selectNewInfoByHour(String ip){return memoryInfoMapper.selectNewInfoByHour(ip);}
+
+
+
+    public List<MemoryInfo> getMemoryInfoByNum(String ip,int num){
+        return memoryInfoMapper.selectMemoryInfoByNumAndIp(ip,num);
+    }
 
 }

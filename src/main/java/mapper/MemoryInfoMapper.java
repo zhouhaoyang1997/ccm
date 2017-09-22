@@ -1,12 +1,14 @@
 package mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import pojo.MemoryInfo;
 
 public interface MemoryInfoMapper {
-    List<MemoryInfo> selectNewInfoByHour(String ip);
+    List<MemoryInfo> selectMemoryInfoByNumAndIp(@Param("ip") String ip,@Param("num") int num);
 
-    MemoryInfo selectLatestMemory(String ip);
+    MemoryInfo selectLatestMemory(@Param("ip") String ip);
 
 
 }

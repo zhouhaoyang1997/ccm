@@ -17,8 +17,8 @@
   <select id="selectLastedNetInfo" resultMap="BaseResultMap" parameterType="String">
     SELECT *,MAX(time) FROM net_info WHERE Ip_id=#{ip}
   </select>
-  <select id="selectNewInfoByHour" resultMap="BaseResultMap" parameterType="String">
-    SELECT * FROM net_info WHERE Ip_id=#{ip} ORDER BY time DESC limit 0,20
+  <select id="selectNetInfoByNumAndIp" resultMap="BaseResultMap">
+    SELECT * FROM net_info WHERE Ip_id=#{ip} ORDER BY time DESC limit 0,#{num}
   </select>
 
 

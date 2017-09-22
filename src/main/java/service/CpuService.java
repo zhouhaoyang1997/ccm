@@ -21,4 +21,10 @@ public class CpuService {
         return cpuInfoMapper.selectLastedCpuInfo(ipId);
     }
     public List<CpuInfo> selectNewInfoByHour(String ip){return cpuInfoMapper.selectNewInfoByHour(ip);}
+
+
+
+    public List<CpuInfo> getCpuInfoByNum(String ip,int num){
+        return cpuInfoMapper.selectCpuInfoByNumAndIp(ip,num);
+    }
 }

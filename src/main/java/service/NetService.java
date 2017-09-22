@@ -23,7 +23,7 @@ public class NetService {
 
 
 
-    public List<NetInfo> getNetInfoByNum(String ip){
-        return netInfoMapper.selectNewInfoByHour(ip);
+    public List<NetInfo> getNetInfoByNum(String ip,int num){
+        return netInfoMapper.selectNetInfoByNumAndIp(ip,num);
     }
 }

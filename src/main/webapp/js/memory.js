@@ -2,6 +2,8 @@ var memory = echarts.init(document.getElementById("memory"));
 var ipId = $("#ipId").val();
 $(function () {
 
+
+    memory.hideLoading();
     memory.setOption(
         {
             tooltip:{},
@@ -86,6 +88,6 @@ function returnData(date,value){
     var now = new Date(parseInt(date) * 1000);
     return {
         name:now.toString(),
-        value:[[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/')+' '+[now.getHours(),now.getMinutes(),now.getSeconds()].join(':'),value/1024]
+        value:[[now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/')+' '+[now.getHours(),now.getMinutes(),now.getSeconds()].join(':'),value]
     }
 }
