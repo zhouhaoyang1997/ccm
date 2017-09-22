@@ -85,101 +85,35 @@
         <!-- MAIN CONTENT -->
         <div class="main-content">
             <div class="container-fluid">
+                <input type="hidden" value="${location.ipId}" id="ipId">
+                <h3><span>${location.cluster}</span><i
+                        class="icon-submenu lnr lnr-chevron-right"></i><a
+                        href="/server?serverIp=${location.serverIp}">${location.serverIp}</a><i
+                        class="icon-submenu lnr lnr-chevron-right"></i><a href="/vm?ipId=${location.ipId}">${location.ipId}</a></h3>
+                <div class="panel panel-success">
 
-                <!-- 主机详情-->
-                <div class="panel">
-                    <div class="panel-heading panel-success"><h4>主机详情 ${server.serverIp}</h4></div>
-                    <input type="hidden" value="${server.serverIp}" id="ipId">
+                    <div class="panel-heading">
+
+                        <h3>Cpu详情</h3>
+                    </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card-box" style="background-color: #ffffff">
-                                    <h4 class="header-title m-t-0" align="center">CPU</h4>
-                                    <a href="../cpu/detail?ip=${server.serverIp}" data-toggle="tooltip"
-                                       data-placement="top" title="点击查看近期详情">
-                                        <div id="cpu" style="height: 345px"></div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="card-box" style="background-color: #ffffff">
-                                    <h4 class="header-title m-t-0" align="center">内存</h4>
-                                    <a href="../memory/detail?ip=${server.serverIp}" data-toggle="tooltip"
-                                       data-placement="top" title="点击查看近期详情">
-                                        <div id="memory" style="height: 345px"></div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="card-box" style="background-color: #ffffff">
-                                    <h4 class="header-title m-t-0" align="center">网络</h4>
-                                    <a href="../net/detail?ip=${server.serverIp}" data-toggle="tooltip"
-                                       data-placement="top" title="点击查看近期详情">
-                                        <div id="net" style="height: 345px;">
-
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        <div id="cpu" style="width: 100%;height: 500px;"></div>
                     </div>
                 </div>
 
-                <!--虚拟机列表 -->
-                <div class="panel">
-                    <div class="panel-heading panel-info"><h4>虚拟机列表</h4></div>
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>名称</th>
-                                <th>IP</th>
-                                <th>物理机Ip</th>
-                                <th>CPU利用率</th>
-                                <th>内存利用率</th>
-                                <th>流量(入/出)</th>
-                                <th>开机时间</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="vm" items="${server.vm}">
-                                <tr>
 
-                                    <td><a href="/vm?ipId=${vm.ipId}">${vm.osPlatform}</a></td>
-                                    <td>${vm.ipId}</td>
-
-                                    <td>${vm.serverIp}</td>
-
-                                    <td><a href="#"><span class="progress">
-            <div class="progress-bar progress-bar-success"
-                 style="width: ${vm.cpuPercent}%;color:orangered">${vm.cpuPercent}%
-            </div></span>
-                                    </a></td>
-                                    <td><a href="#"><span class="progress">
-            <div class="progress-bar progress-bar-success"
-                 style="width:${vm.memoryPercent}%;color:orangered">${vm.memoryPercent}%
-            </div></span>
-                                    </a></td>
-                                    <td><a href="#">${vm.sent}/${vm.receive}Kbps
-                                    </a></td>
-                                    <td>${vm.bootTime}</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
+            <!-- END MAIN CONTENT -->
         </div>
-        <!-- END MAIN CONTENT -->
+        <!-- END MAIN -->
+
+        <div class="clearfix"></div>
+        <footer>
+            <div class="container-fluid">
+                <p class="copyright">&copy; 2017 感谢该模板的提供者</p>
+            </div>
+        </footer>
     </div>
-    <!-- END MAIN -->
-    <div class="clearfix"></div>
-    <footer>
-        <div class="container-fluid">
-            <p class="copyright">&copy; 2017 感谢该模板的提供者</p>
-        </div>
-    </footer>
 </div>
 <!-- END WRAPPER -->
 <!-- Javascript -->
@@ -188,7 +122,7 @@
 <script src="js/klorofil-common.js"></script>
 <script src="js/echarts.min.js"></script>
 <script src="js/echarts-liquidfill.js"></script>
-<script src="js/vmDetail.js"></script>
+<script src="js/cpu.js"></script>
 </body>
 
 </html>

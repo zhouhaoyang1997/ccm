@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import service.ServerService;
 import service.VmService;
 import vo.Cluster;
+import vo.Location;
 import vo.Server;
 import vo.Vm;
 
@@ -28,15 +29,17 @@ public class MainController {
      * @param request
      * @return
      */
-    @RequestMapping("/vmDetail")
+    @RequestMapping("/vm")
     public String vmDetail(String ipId, HttpServletRequest request){
         Vm vm = vmService.getLastedVm(ipId);
         request.setAttribute("vm",vm);
+        Location location = vmService.getLocation(ipId);
+        request.setAttribute("location",location);
         return "vm";
     }
 
     /**
-     * 服务器主机详情页
+     * 物理机主机详情页
      * @param serverIp
      * @param req
      * @return

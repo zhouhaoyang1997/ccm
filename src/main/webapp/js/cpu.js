@@ -1,22 +1,42 @@
-var network = echarts.init(document.getElementById("network"));
+var network = echarts.init(document.getElementById("cpu"));
 var ipId = $("#ipId").val();
 function getData(){
-    $.get('../net/hour?ip='+ipId).done(function (data) {
-        send=[];
-        recv=[];
+    $.get('../cpu/hour?ip='+ipId).done(function (data) {
+        user=[];
+        system=[];
+        idle=[];
+        interrupt=[];
+        dpc=[];
+        percent=[];
         //填入数据
         for(var i=0;i<data.length;i++){
-            send.push(returnData(data[i].time,data[i].netIobytessent));
-            recv.push(returnData(data[i].time,data[i].netIobytesrecv));
+            user.push(returnData(data[i].time,data[i].cpuUser));
+            system.push(returnData(data[i].time,data[i].cpuSystem));
+            idle.push(returnData(data[i].time,data[i].cpuIdle));
+            interrupt.push(returnData(data[i].time,data[i].cpuInterrupt));
+            dpc.push(returnData(data[i].time,data[i].cpuDpc));
+            percent.push(returnData(data[i].time,data[i].cpuPercent));
         }
         network.setOption({
             series: [{
                 // 根据名字对应到相应的系列
-                name: 'Send',
-                data: send
+                name: 'user',
+                data: user
             },{
-                name: 'Recv',
-                data: recv
+                name: 'system',
+                data: system
+            },{
+                name: 'idle',
+                data: idle
+            },{
+                name: 'interrupt',
+                data: interrupt
+            },{
+                name: 'dpc',
+                data: dpc
+            },{
+                name: 'percent',
+                data: percent
             }]
         })
     });
@@ -49,7 +69,7 @@ $(function () {
                 }
             ],
             legend:{
-                data:['Send','Recv']
+                data:['user','system','idle','interrupt','dpc']
             },
             xAxis: {
                 type: 'time',
@@ -66,19 +86,38 @@ $(function () {
                     show: false
                 }
             },series: [{
-            name:'Send',
+            name:'user',
             type:'line',
             data: []
         },{
-            name:'Recv',
+            name:'system',
+            type:'line',
+            data: []
+        },{
+            name:'idle',
+            type:'line',
+            data: []
+        },{
+            name:'interrupt',
+            type:'line',
+            data: []
+        },{
+            name:'dpc',
+            type:'line',
+            data: []
+        },{
+            name:'percent',
             type:'line',
             data: []
         }
         ]}
     );
-    var send=[];
-    var recv=[];
-
+   var user=[];
+    var system=[];
+    var idle=[];
+    var interrupt=[];
+    var dpc=[];
+    var percent=[];
 
     //getData();
     setInterval(getData(), 300*1000);

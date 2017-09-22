@@ -17,6 +17,12 @@
         <result property="memoryTotal" column="Memory_Total"/>
         <result property="diskTotal" column="Disk_Total"/>
     </resultMap>
+    
+    <resultMap id="Location" type="vo.Location">
+        <result property="cluster" column="Cluster"/>
+        <result property="serverIp" column="Server_Ip"/>
+        <result property="ipId" column="Ip_id"/>
+    </resultMap>
 
     <select id="getLastedVm" parameterType="String" resultMap="Vm">
         SELECT Server_Ip,Cluster,summary.Ip_id,Boot_Time,Os_Platform,Cpu_Percent,Memory_percent,Pc_Name,Max(cpu_info.time),Cpu_Percent,Memory_percent,Net_IoBytesSent,Net_IoBytesRecv,
@@ -25,4 +31,8 @@
         WHERE summary.Ip_id=cpu_info.Ip_id and summary.Ip_id=memory_info.Ip_id and summary.Ip_id=#{ipId}
     </select>
 
+    <select id="getLocation" parameterType="String" resultMap="Location">
+        SELECT Server_Ip,Cluster,Ip_id FROM summary where Ip_id=#{ipId}
+    </select>
+    
 </mapper>

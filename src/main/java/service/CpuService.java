@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.CpuInfo;
 
+import java.util.List;
+
 @Service
 public class CpuService {
 
@@ -17,5 +19,11 @@ public class CpuService {
      */
     public CpuInfo getCpuInfo(String ipId){
         return cpuInfoMapper.selectLastedCpuInfo(ipId);
+    }
+
+
+
+    public List<CpuInfo> getCpuInfoByNum(String ip,int num){
+        return cpuInfoMapper.selectCpuInfoByNumAndIp(ip,num);
     }
 }

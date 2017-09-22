@@ -1,6 +1,8 @@
 package mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import pojo.NetInfo;
 
 public interface NetInfoMapper {
@@ -11,6 +13,6 @@ public interface NetInfoMapper {
      */
     NetInfo selectLastedNetInfo(String ip);
 
-    List<NetInfo> selectNewInfoByHour(String ip);
+    List<NetInfo> selectNetInfoByNumAndIp(@Param("ip")String ip,@Param("num")int num);
 
 }

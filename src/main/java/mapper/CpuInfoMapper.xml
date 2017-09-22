@@ -15,4 +15,7 @@
     SELECT *,MAX(time) FROM cpu_info WHERE Ip_id=#{ip}
   </select>
 
+  <select id="selectCpuInfoByNumAndIp" resultMap="BaseResultMap">
+    SELECT * FROM cpu_info WHERE Ip_id=#{ip} ORDER BY time DESC limit 0,#{num}
+  </select>
 </mapper>
