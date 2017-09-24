@@ -3,7 +3,7 @@ package service;
 import mapper.ServerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import vo.Server;
+import vo.PhysicalServer;
 import vo.Vm;
 
 import java.util.List;
@@ -18,5 +18,8 @@ public class ServerService {
 
     public List<Vm> getAllVm(String serverIp){
         return serverMapper.getAllVoByServerIp(serverIp);
+    }
+    public List<PhysicalServer> getPhysicalServerByCluster(String ClusterName){
+        return  serverMapper.getAllPhysicalServerByCluster(ClusterName);
     }
 }

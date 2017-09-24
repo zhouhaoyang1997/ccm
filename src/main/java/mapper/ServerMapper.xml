@@ -15,12 +15,23 @@
         <result property="sent" column="Net_IoBytesSent"/>
         <result property="receive" column="Net_IoBytesRecv"/>
     </resultMap>
+    <!--用于查询某个集群下的所有的物理机 -->
 
+    <resultMap id="PhysicalServer" type="vo.PhysicalServer">
+        <result property="physicalServerIp" column="Server_Ip"/>
+        <result property="physicalServerName" column="Node"/>
+        <result property="cluster" column="Cluster"/>
+    </resultMap>
     <select id="getAllVoByServerIp" parameterType="String" resultMap="BaseVm">
         SELECT Server_Ip,Cluster,summary.Ip_id,Boot_Time,Os_Platform,Cpu_Percent,Memory_percent,Pc_Name,Max(cpu_info.time),Cpu_Percent,Memory_percent,Net_IoBytesSent,Net_IoBytesRecv
          FROM summary,cpu_info,memory_info,net_info
          WHERE summary.Ip_id=cpu_info.Ip_id and summary.Ip_id=memory_info.Ip_id and Server_Ip=#{serverIp} and summary.Ip_id!=Server_Ip
          GROUP BY summary.Ip_id
     </select>
-
+    <select id="getAllPhysicalServerByCluster" parameterType="String" resultMap="PhysicalServer">
+        SELECT Node,Cluster,Server_Ip
+        FROM summary
+        WHERE  cluster= #{cluster} AND summary.Ip_id=Server_Ip
+        GROUP BY summary.Ip_id
+    </select>
 </mapper>

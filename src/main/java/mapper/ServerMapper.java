@@ -1,7 +1,6 @@
 package mapper;
 
-import org.apache.ibatis.annotations.Param;
-import vo.Server;
+import vo.PhysicalServer;
 import vo.Vm;
 
 import java.util.List;
@@ -12,4 +11,5 @@ import java.util.List;
 public interface ServerMapper {
 
     public List<Vm> getAllVoByServerIp(String serverIp);
+    public List<PhysicalServer> getAllPhysicalServerByCluster(String cluster);
 }

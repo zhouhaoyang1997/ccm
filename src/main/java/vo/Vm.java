@@ -10,6 +10,26 @@ import java.util.Date;
 public class Vm {
     private String ipId;
 
+
+
+    @Override
+    public String toString() {
+        return "Vm{" +
+                "ipId='" + ipId + '\'' +
+                ", serverIp='" + serverIp + '\'' +
+                ", osPlatform='" + osPlatform + '\'' +
+                ", pcName='" + pcName + '\'' +
+                ", cpuPercent=" + cpuPercent +
+                ", memoryPercent=" + memoryPercent +
+                ", sent=" + sent +
+                ", receive=" + receive +
+                ", bootTime='" + bootTime + '\'' +
+                ", cpuCount=" + cpuCount +
+                ", memoryTotal=" + memoryTotal +
+                ", diskTotal=" + diskTotal +
+                '}';
+    }
+
     private String serverIp;
 
     private String osPlatform;   //系统机型号

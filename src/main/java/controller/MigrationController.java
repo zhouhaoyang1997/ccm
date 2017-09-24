@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import service.ClusterService;
-import service.CpuService;
-import service.DiskService;
-import service.MemoryService;
+import service.*;
 
 import java.util.List;
 
@@ -24,11 +21,12 @@ public class MigrationController {
     @Autowired
     MemoryService memoryService;
     @Autowired
-    ClusterService clusterService;
+    ServerService serverService;
+    @Autowired
+    MigrationService migrationService;
     @RequestMapping("/migrationList")
     @ResponseBody
-    public List getMigrationList(String serverIp){
-        clusterService.getAllServer(serverIp);
-        return null;
+    public List getMigrationList(String ClusterName) {
+        return migrationService.getMigrationListByClusterName("ccc");
     }
 }
