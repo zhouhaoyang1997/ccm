@@ -5,8 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.*;
-
-import java.util.List;
+import vo.Migration;
 
 /**
  * @author zhy
@@ -26,7 +25,7 @@ public class MigrationController {
     MigrationService migrationService;
     @RequestMapping("/migrationList")
     @ResponseBody
-    public List getMigrationList(String ClusterName) {
+    public Migration getMigrationList(String ClusterName) {
         return migrationService.getMigrationListByClusterName("ccc");
     }
 }

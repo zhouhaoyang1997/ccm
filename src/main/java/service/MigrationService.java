@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.CpuInfo;
 import pojo.MemoryInfo;
+import vo.Migration;
 import vo.PhysicalServer;
 import vo.Vm;
 
@@ -31,7 +32,9 @@ public class MigrationService {
      * @param ClusterName
      * @return
      */
-    public List getMigrationListByClusterName(String ClusterName){
+    public Migration getMigrationListByClusterName(String ClusterName){
+        //创建策略
+        Migration migration = new Migration();
         //cpu memory百分比的平均值
         double cpuPercentAvg;
         double memoryPercentAvg;
@@ -39,9 +42,9 @@ public class MigrationService {
         List<PhysicalServer> highCpuPercentList = new ArrayList<PhysicalServer>();
         //高利用率memory队列
         List<PhysicalServer> highMemoryPercentList=new ArrayList<PhysicalServer>();
-        //高利用率cpu队列
+        //低利用率cpu队列
         List<PhysicalServer>  lowCpuPercentList=new ArrayList<PhysicalServer>();
-        //高利用率memory队列
+        //低利用率memory队列
         List<PhysicalServer>  lowMemoryPercentList=new ArrayList<PhysicalServer>();
         //得到所有物理机
         List<PhysicalServer> physicalServerList = getPhysicalServerByClusterName(ClusterName);
@@ -53,7 +56,7 @@ public class MigrationService {
             cpuPercentAvg = getAvgOfLastHourCpuPercent(ip);
             memoryPercentAvg = getAvgOfLastHourMemoryPercent(ip);
 
-            //初始化物理机
+            //初始化物理机平均值
             physicalServer.setAvgOfLastHourCpuPercent(cpuPercentAvg);
             physicalServer.setAvgOfLastHourmemoryPercent(memoryPercentAvg);
 
@@ -61,13 +64,13 @@ public class MigrationService {
             if(cpuPercentAvg>10){
                 highCpuPercentList.add(physicalServer);
             }
-            if(cpuPercentAvg<40){
+            if(cpuPercentAvg<10){
                 lowCpuPercentList.add(physicalServer);
             }
             if(memoryPercentAvg>10){
                 highMemoryPercentList.add(physicalServer);
             }
-            if(memoryPercentAvg<40){
+            if(memoryPercentAvg<10){
                 lowMemoryPercentList.add(physicalServer);
             }
         }
@@ -79,8 +82,15 @@ public class MigrationService {
         for(PhysicalServer physicalServer : highMemoryPercentList ){
             Vm maxMemoryPercentVm  =  getMaxMemoryPercentVmByPhysicalServer(physicalServer);
             physicalServer.setMaxMemoryPercentVm(maxMemoryPercentVm);
+            System.out.println(physicalServer);
         }
-        return physicalServerList;
+
+        migration.setHighCpuPercentList(highCpuPercentList);
+        migration.setHighMemoryPercentList(highMemoryPercentList);
+        migration.setLowCpuPercentList(lowCpuPercentList);
+        migration.setLowMemoryPercentList(lowMemoryPercentList);
+        return migration;
+
     }
 
     /**
@@ -113,10 +123,11 @@ public class MigrationService {
         Double maxMemoryPercent= 0.0;
         Vm maxMemoryPercentVm = null;
         List<Vm> vmList = serverMapper.getAllVoByServerIp(physicalServer.getPhysicalServerIp());
-        System.out.println(vmList.toString()+"--------------------");
         for(Vm vm : vmList){
             maxMemoryPercent = maxMemoryPercent>vm.getMemoryPercent()?maxMemoryPercent:vm.getMemoryPercent();
         }
+        System.out.println(maxMemoryPercent);
+
         for(Vm vm : vmList){
             vm.setMemoryPercent(maxMemoryPercent.floatValue());
             if(Math.floor(vm.getMemoryPercent())==Math.floor(maxMemoryPercent.floatValue())){
